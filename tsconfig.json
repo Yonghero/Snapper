@@ -1,20 +1,26 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "lib": ["esnext"],
+    "target": "es2016",
     "jsx": "preserve",
-    "declaration": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
+    "lib": ["DOM", "ESNext"],
+    "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "resolveJsonModule": true,
+    "types": [
+      "vite/client",
+      "unplugin-vue-macros/macros-global"
+    ],
+    "allowJs": true,
     "strict": true,
     "strictNullChecks": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "declarationMap": true,
-    "noImplicitAny": false,
-    "outDir": "dist/types"
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*"]
+  "exclude": ["dist", "node_modules", "eslint.config.js"]
 }

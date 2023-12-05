@@ -1,2 +1,3 @@
-# pkg-name
-Starter template for TypeScript VueJSx library
+# Snappper
+
+`打造一个Web端的Xnapper`

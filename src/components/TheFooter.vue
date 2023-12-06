@@ -8,6 +8,8 @@ function toggleDarkMode() {
   else
     document.body.removeAttribute('arco-theme')
 }
+
+toggleDarkMode()
 </script>
 
 <template>

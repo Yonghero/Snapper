@@ -1,64 +1,99 @@
 <script setup lang='ts'>
 import type { FileItem } from '@arco-design/web-vue'
+import { IconDelete, IconSave } from '@arco-design/web-vue/es/icon'
+import { useScreenshotStore } from '~/store/useScreenshotStore'
 
+const { imgStyled, imgWrapperStyled } = useScreenshotStore()
+const { formClipboard, formPasteEvent, formUpload } = getImageFileWays()
+
+const screenshotBg = ref<HTMLElement>()
+const screenshotImg = ref<HTMLElement>()
 const previewImage = ref<string>()
+const showing = computed(() => previewImage.value && previewImage.value?.length > 0)
 
-function handleFileSelect(_: FileItem[], currentFile: FileItem) {
-  if (currentFile && currentFile.file)
-
-    readerImage(currentFile.file)
+async function handleFileSelect(_: FileItem[], currentFile: FileItem) {
+  const file = await formUpload(currentFile)
+  displayImage(file)
 }
 
-function pasteFromClipboard() {
-  navigator.clipboard.read().then((clipboardItems) => {
-    const clipboard = clipboardItems[0]
-
-    if (clipboard?.types.includes('image/png')) {
-      clipboard.getType('image/png').then((blob) => {
-        previewImage.value = URL.createObjectURL(blob)
-        // const file = new File([blob], 'pasted-image.png', { type: 'image/png' })
-        // readerImage(file)
-      })
-    }
-  })
+async function pasteFromClipboard() {
+  const file = await formClipboard()
+  displayImage(file)
 }
 
-function readerImage(file: File) {
+function displayImage(file: File) {
   const reader = new FileReader()
 
-  reader.onload = function (e) {
+  reader.onload = async (e) => {
     if (e.target?.result)
       previewImage.value = e.target.result as string
+
+    await nextTick()
+    await nextTick()
+
+    const imgSize = screenshotImg.value?.getBoundingClientRect()
+    if (!imgSize || !screenshotBg.value)
+      return
+    const width = `${imgSize?.width + imgWrapperStyled.padding}px`
+    const height = `${imgSize?.height + imgWrapperStyled.padding}px`
+
+    screenshotBg.value.style.width = width
+    screenshotBg.value.style.height = height
   }
 
   reader.readAsDataURL(file)
 }
 
 onMounted(() => {
-  document.addEventListener('paste', (event) => {
-    if (!event.clipboardData || !event.clipboardData.items)
-      return
-    const items = event.clipboardData.items
-
-    // @ts-expect-error anyway
-    // 检查是否有图片数据
-    for (const item of items) {
-      if (item.type.indexOf('image') === 0) {
-        const blob = item.getAsFile()
-
-        previewImage.value = URL.createObjectURL(blob)
-      }
-    }
+  document.addEventListener('paste', async (event) => {
+    const file = await formPasteEvent(event)
+    displayImage(file)
   })
 })
 </script>
 
 <template>
-  <div class="basis-[70%]" flex="~ items-center justify-center col gap-y-10">
-    <a-button @click="pasteFromClipboard">
-      粘贴剪贴板中的图片
+  <div class="basis-[70%]" flex="~ items-center justify-center col gap-y-10" relative overflow-auto>
+    <div
+
+      absolute right-0 top-1 w-full flex-self-end
+      flex="~ items-center gap-x-2 justify-between"
+    >
+      <IconDelete
+        style="font-size: 25px;stroke-width: 2;color: red"
+        cursor-pointer
+      />
+      <IconSave style="font-size: 25px;stroke-width: 2" cursor-pointer />
+    </div>
+    <a-button
+      v-if="!showing"
+      @click="pasteFromClipboard"
+    >
+      Paste image from the clipboard
     </a-button>
-    <img v-if="previewImage" :src="previewImage" alt="">
+    <!-- 截图容器 -->
+    <div
+      v-if="showing"
+      class="screenshot-wrapper"
+      flex="~ items-center justify-center"
+      border-box relative h-full w-full overflow-auto p-5
+    >
+      <div
+        ref="screenshotBg"
+        class="screenshot-bg"
+        flex="~ justify-center items-center"
+        :style="imgWrapperStyled"
+      >
+        <img
+          ref="screenshotImg"
+          :src="previewImage"
+          :style="imgStyled"
+          class="transform-scale-[0.9]"
+          object-scale-down
+        >
+      </div>
+    </div>
+    <!-- 上传容器 -->
     <a-upload
       v-else
       accept="image/*"
@@ -80,13 +115,10 @@ onMounted(() => {
         >
           <div>
             Drag the file here or
-            <span style="color: #3370FF"> Click to upload</span>
+            <span style="color: #3370FF">Click to upload</span>
           </div>
         </div>
       </template>
     </a-upload>
   </div>
 </template>
-
-<style scoped lang='scss'>
-</style>

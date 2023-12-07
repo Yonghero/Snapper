@@ -1,8 +1,11 @@
 <script setup>
 import { useScreenshotStore } from '~/store/useScreenshotStore'
 
-const model = ref({})
+const colorSet = [
+  { color: 'linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%)', desc: 'shville' },
+]
 
+const model = ref({})
 const { imgInsetStyled, imgWrapperStyled } = useScreenshotStore()
 
 function onRoundedChange(v) {
@@ -34,11 +37,11 @@ function onInput(event) {
     pl-4
   >
     <a-select :style="{ width: '320px' }" placeholder="Please select ...">
-      <a-option>Beijing</a-option>
+      <a-option>Default Preset</a-option>
       <a-option>Shanghai</a-option>
       <a-option>Guangzhou</a-option>
       <a-option disabled>
-        Disabled
+        New Preset...
       </a-option>
     </a-select>
     <a-divider orientation="left">
@@ -80,6 +83,16 @@ function onInput(event) {
           <a-slider max="20" @change="onShadowChange" />
         </a-form-item>
       </div>
+      <a-form-item label="Background">
+        <div w-full flex="~ wrap gap-x-3 gap-y-2">
+          <Background
+            v-for="i in colorSet"
+            :key="i.color"
+            :color="i.color"
+            :desc="i.desc"
+          />
+        </div>
+      </a-form-item>
     </a-form>
   </div>
 </template>

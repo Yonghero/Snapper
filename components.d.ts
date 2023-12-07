@@ -11,6 +11,7 @@ declare module 'vue' {
     ADivider: typeof import('@arco-design/web-vue')['Divider']
     AOption: typeof import('@arco-design/web-vue')['Option']
     ASelect: typeof import('@arco-design/web-vue')['Select']
+    Background: typeof import('./src/components/Background.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Screenshot: typeof import('./src/components/Screenshot.vue')['default']

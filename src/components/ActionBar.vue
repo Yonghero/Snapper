@@ -3,14 +3,27 @@ import { useScreenshotStore } from '~/store/useScreenshotStore'
 
 const model = ref({})
 
-const { imgStyled, imgWrapperStyled } = useScreenshotStore()
+const { imgInsetStyled, imgWrapperStyled } = useScreenshotStore()
 
 function onRoundedChange(v) {
-  imgStyled.borderRadius = `${v}px`
+  imgInsetStyled.borderRadius = `${v}px`
+}
+
+function onShadowChange(v) {
+  const boxShadow = `rgba(0, 0, 0, 0.35) 0px ${5 + v}px ${15 + v}px`
+  imgInsetStyled.boxShadow = boxShadow
 }
 
 function onSliderChange(v, prop) {
   imgWrapperStyled[prop] = `${v}px`
+}
+
+function onInsetChange(v) {
+  imgInsetStyled.padding = `${v}px`
+}
+
+function onInput(event) {
+  imgInsetStyled.backgroundColor = event.target.value
 }
 </script>
 
@@ -38,12 +51,35 @@ function onSliderChange(v, prop) {
           @change="(v) => onSliderChange(v, 'padding')"
         />
       </a-form-item>
-      <a-form-item label="Inset">
-        <a-slider :max="100" />
-      </a-form-item>
-      <a-form-item label="Rounded">
-        <a-slider @change="onRoundedChange" />
-      </a-form-item>
+      <div w-full flex items-center justify-center gap-x-1>
+        <a-form-item label="Inset">
+          <a-slider
+            :max="100"
+            @change="onInsetChange"
+          />
+        </a-form-item>
+        <div class="mr-1 mt-[5px]" flex="~ items-center gap-x-2">
+          <span>Balance</span>
+          <div
+            class="h-[24px] w-[60px] rounded-[2px]"
+            :style="{ background: imgInsetStyled.backgroundColor }"
+          >
+            <input
+              type="color"
+              class="opacity-0"
+              @input="onInput"
+            >
+          </div>
+        </div>
+      </div>
+      <div class="mr-1 mt-[5px]" flex="~ items-center gap-x-3">
+        <a-form-item label="Rounded">
+          <a-slider @change="onRoundedChange" />
+        </a-form-item>
+        <a-form-item label="Shadow">
+          <a-slider max="20" @change="onShadowChange" />
+        </a-form-item>
+      </div>
     </a-form>
   </div>
 </template>

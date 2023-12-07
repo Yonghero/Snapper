@@ -4,7 +4,7 @@ import { IconDelete, IconSave } from '@arco-design/web-vue/es/icon'
 import html2canvas from 'html2canvas'
 import { useScreenshotStore } from '~/store/useScreenshotStore'
 
-const { imgStyled, imgWrapperStyled } = useScreenshotStore()
+const { imgInsetStyled, imgWrapperStyled } = useScreenshotStore()
 const { formClipboard, formPasteEvent, formUpload } = getImageFileWays()
 
 const screenshotBg = ref<HTMLElement>()
@@ -119,13 +119,19 @@ onMounted(() => {
         :style="imgWrapperStyled"
         @dragstart="dragStart"
       >
-        <img
-          ref="screenshotImg"
-          :src="previewImage"
-          :style="imgStyled"
+        <div
+          :style="imgInsetStyled"
           class="transform-scale-[0.9]"
-          object-scale-down
         >
+          <img
+            ref="screenshotImg"
+            :style="{
+              borderRadius: (imgInsetStyled.padding === 0 || imgInsetStyled.padding === '0px') ? imgInsetStyled.borderRadius : 0,
+            }"
+            :src="previewImage"
+            object-scale-down
+          >
+        </div>
       </div>
     </div>
     <!-- 上传容器 -->

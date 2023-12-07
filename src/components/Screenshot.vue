@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 import type { FileItem } from '@arco-design/web-vue'
 import { IconDelete, IconSave } from '@arco-design/web-vue/es/icon'
+import html2canvas from 'html2canvas'
 import { useScreenshotStore } from '~/store/useScreenshotStore'
 
 const { imgStyled, imgWrapperStyled } = useScreenshotStore()
@@ -44,6 +45,36 @@ function displayImage(file: File) {
   reader.readAsDataURL(file)
 }
 
+function removeScreenshot() {
+  previewImage.value = ''
+}
+
+function exportAsImage() {
+  if (!screenshotBg.value)
+    return
+
+  html2canvas(screenshotBg.value).then((canvas) => {
+    // Convert canvas to data URL
+    const dataUrl = canvas.toDataURL('image/png')
+
+    // Create a link element and trigger a download
+    const link = document.createElement('a')
+    link.href = dataUrl
+    link.download = 'exported_image.png'
+    link.click()
+  })
+}
+
+function dragStart(event: any) {
+  // Store the offset between mouse position and element position
+  event.dataTransfer.setData('text/plain', null)
+  event.dataTransfer.setDragImage(new Image(), 0, 0) // Hide default drag image
+}
+
+document.body.addEventListener('dragend', async () => {
+  exportAsImage()
+})
+
 onMounted(() => {
   document.addEventListener('paste', async (event) => {
     const file = await formPasteEvent(event)
@@ -55,15 +86,17 @@ onMounted(() => {
 <template>
   <div class="basis-[70%]" flex="~ items-center justify-center col gap-y-10" relative overflow-auto>
     <div
-
-      absolute right-0 top-1 w-full flex-self-end
+      absolute right-0 top-1 z-2 w-full flex-self-end
       flex="~ items-center gap-x-2 justify-between"
     >
       <IconDelete
-        style="font-size: 25px;stroke-width: 2;color: red"
-        cursor-pointer
+        style="font-size: 25px;stroke-width: 2;color: red;cursor: pointer;"
+        @click="removeScreenshot"
       />
-      <IconSave style="font-size: 25px;stroke-width: 2" cursor-pointer />
+      <IconSave
+        style="font-size: 25px;stroke-width: 2;cursor: pointer;"
+        @click="exportAsImage"
+      />
     </div>
     <a-button
       v-if="!showing"
@@ -74,15 +107,17 @@ onMounted(() => {
     <!-- 截图容器 -->
     <div
       v-if="showing"
-      class="screenshot-wrapper"
+      id="screenshot-wrapper"
       flex="~ items-center justify-center"
-      border-box relative h-full w-full overflow-auto p-5
+      border-box relative h-full w-full cursor-grab overflow-auto p-5
     >
       <div
         ref="screenshotBg"
         class="screenshot-bg"
+        draggable="true"
         flex="~ justify-center items-center"
         :style="imgWrapperStyled"
+        @dragstart="dragStart"
       >
         <img
           ref="screenshotImg"

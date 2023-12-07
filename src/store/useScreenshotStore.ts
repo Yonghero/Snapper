@@ -11,8 +11,6 @@ export const useScreenshotStore = defineStore('screenshot', () => {
   const imgWrapperStyled = ref({
     backgroundImage: 'linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5))',
     padding: 50,
-    increaseWidth: 0,
-    increaseHeight: 0,
   })
 
   return { imgStyled, imgWrapperStyled }

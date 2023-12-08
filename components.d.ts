@@ -8,9 +8,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ActionBar: typeof import('./src/components/ActionBar.vue')['default']
-    ADivider: typeof import('@arco-design/web-vue')['Divider']
-    AOption: typeof import('@arco-design/web-vue')['Option']
-    ASelect: typeof import('@arco-design/web-vue')['Select']
     Background: typeof import('./src/components/Background.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

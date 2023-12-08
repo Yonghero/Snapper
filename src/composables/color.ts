@@ -4,6 +4,11 @@ function rgbToHex(r: number, g: number, b: number) {
   return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`
 }
 
+/**
+ * 拿去一张图片中出现最多的颜色
+ * @param image
+ * @returns
+ */
 export async function getMaxColorFormImg(image: HTMLImageElement) {
   // 缩小大尺寸图片
   if (image.width > maxImageSize || image.height > maxImageSize) {

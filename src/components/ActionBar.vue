@@ -67,9 +67,8 @@ function onChangeBackground({ color }) {
           />
         </a-form-item>
         <div class="mr-1 mt-[5px]" flex="~ items-center gap-x-2">
-          <span>Balance</span>
           <div
-            class="h-[24px] w-[60px] rounded-[2px]"
+            class="h-[24px] w-[60px] b-2 border-[#a9aeb8] rounded-[2px]"
             :style="{ background: imgInsetStyled.backgroundColor }"
           >
             <input

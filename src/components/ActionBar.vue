@@ -2,8 +2,12 @@
 import { useScreenshotStore } from '~/store/useScreenshotStore'
 
 const colorSet = [
-  { color: 'linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%)', desc: 'shville' },
-  { color: 'transparent', desc: 'none' },
+  { color: 'linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%)', desc: 'Shville' },
+  { color: 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)', desc: 'Sunny' },
+  { color: 'linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)', desc: 'Winter' },
+  { color: 'linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%)', desc: 'Grass' },
+  { color: 'linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)', desc: 'Azure' },
+  { color: 'none', desc: 'None' },
 ]
 
 const model = ref({})

@@ -9,6 +9,11 @@
    <h1 align="center">Snapper 截图美化工具</h1>
 </div>
 
+## 效果图
+
+<img src="./src/assets/light-effect.jpg"/>
+<img src="./src/assets/dark-effect.jpg"/>
+
 ## Features
 
 ### 作为一个网页工具

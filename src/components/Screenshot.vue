@@ -114,12 +114,15 @@ onMounted(() => {
     >
       <div
         ref="screenshotBg"
-        class="screenshot-bg"
+        class="screenshot-bg relative"
         draggable="true"
         flex="~ justify-center items-center"
         :style="imgWrapperStyled"
         @dragstart="dragStart"
       >
+        <h3 absolute bottom-1 right-1>
+          Beautify by Snapper
+        </h3>
         <div
           :style="imgInsetStyled"
           class="transform-scale-[0.9]"

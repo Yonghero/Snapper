@@ -7,9 +7,6 @@
    />
    <h1>Snapper</h1>
 </div>
-
-<div style="width: 100%;height: 1px;background: #ccc;margin: 15px 0"></div>
-
 <h2 align="center">截图美化工具</h2>
 
 `打造一个Web端的Xnapper`

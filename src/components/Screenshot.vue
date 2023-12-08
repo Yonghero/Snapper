@@ -77,9 +77,7 @@ function dragStart(event: any) {
   event.dataTransfer.setDragImage(new Image(), 0, 0) // Hide default drag image
 }
 
-document.body.addEventListener('dragend', async () => {
-  exportAsImage()
-})
+document.body.addEventListener('dragend', exportAsImage)
 
 onMounted(() => {
   document.addEventListener('paste', async (event) => {

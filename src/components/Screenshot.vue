@@ -73,7 +73,6 @@ function exportAsImage() {
 }
 
 function dragStart(event: any) {
-  // Store the offset between mouse position and element position
   event.dataTransfer.setData('text/plain', null)
   event.dataTransfer.setDragImage(new Image(), 0, 0) // Hide default drag image
 }

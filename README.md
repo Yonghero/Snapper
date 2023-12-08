@@ -1,4 +1,4 @@
-<div style="width: 100%;display: flex;align-items: center; justify-content: center; flex-direction: column;row-gap: 5px;">
+<div style="width: 100%;text-align: center;margin-top: 20px">
    <img
       title="Snapper logo"
       alt="Snapper logo"
@@ -6,10 +6,8 @@
       align="center"
       style="width: 20rem"
    />
-   <h1 align="center">Snapper</h1>
-   <code align="center">截图美化工具</code>
+   <h1 align="center">Snapper 截图美化工具</h1>
 </div>
-<h2 align="center"></h2>
 
 ## Features
 

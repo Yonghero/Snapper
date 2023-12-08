@@ -103,6 +103,16 @@ function onChangeBackground({ color }) {
           />
         </div>
       </a-form-item>
+
+      <div flex="~ col gap-y-2">
+        <a-checkbox v-model="useScreenshotStore().showWatermark">
+          Show watermark text
+        </a-checkbox>
+        <a-input
+          v-model="useScreenshotStore().watermarkText"
+          placeholder="Please enter watermark" allow-clear
+        />
+      </div>
     </a-form>
   </div>
 </template>

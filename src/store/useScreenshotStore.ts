@@ -15,5 +15,8 @@ export const useScreenshotStore = defineStore('screenshot', () => {
     padding: 50,
   })
 
-  return { imgInsetStyled, imgWrapperStyled }
+  const showWatermark = ref(true)
+  const watermarkText = ref('Beautify by Snapper')
+
+  return { imgInsetStyled, imgWrapperStyled, watermarkText, showWatermark }
 })

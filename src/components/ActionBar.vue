@@ -3,6 +3,7 @@ import { useScreenshotStore } from '~/store/useScreenshotStore'
 
 const colorSet = [
   { color: 'linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%)', desc: 'shville' },
+  { color: 'transparent', desc: 'none' },
 ]
 
 const model = ref({})
@@ -27,6 +28,10 @@ function onInsetChange(v) {
 
 function onInput(event) {
   imgInsetStyled.backgroundColor = event.target.value
+}
+
+function onChangeBackground({ color }) {
+  imgWrapperStyled.backgroundImage = color
 }
 </script>
 
@@ -90,6 +95,7 @@ function onInput(event) {
             :key="i.color"
             :color="i.color"
             :desc="i.desc"
+            @click="onChangeBackground(i)"
           />
         </div>
       </a-form-item>

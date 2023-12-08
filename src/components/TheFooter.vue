@@ -14,6 +14,7 @@ toggleDarkMode()
 
 <template>
   <nav mt-6 inline-flex gap-2 text-xl>
+    <img src="../assets/logo.png" alt="" class="w-10">
     <button
       icon-btn @click="toggleDarkMode"
     >

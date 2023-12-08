@@ -35,6 +35,7 @@ function displayImage(file: File) {
     const imgSize = screenshotImg.value?.getBoundingClientRect()
     if (!imgSize || !screenshotBg.value)
       return
+
     const width = `${imgSize?.width + imgWrapperStyled.padding}px`
     const height = `${imgSize?.height + imgWrapperStyled.padding}px`
 

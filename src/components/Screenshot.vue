@@ -8,7 +8,7 @@ const { imgInsetStyled, imgWrapperStyled } = useScreenshotStore()
 const { formClipboard, formPasteEvent, formUpload } = getImageFileWays()
 
 const screenshotBg = ref<HTMLElement>()
-const screenshotImg = ref<HTMLElement>()
+const screenshotImg = ref<HTMLImageElement>()
 const previewImage = ref<string>()
 const showing = computed(() => previewImage.value && previewImage.value?.length > 0)
 
@@ -35,6 +35,12 @@ function displayImage(file: File) {
     const imgSize = screenshotImg.value?.getBoundingClientRect()
     if (!imgSize || !screenshotBg.value)
       return
+
+    if (screenshotImg.value) {
+      const maxColor = await getMaxColorFormImg(screenshotImg.value)
+      if (maxColor)
+        useScreenshotStore().imgInsetStyled.backgroundColor = maxColor
+    }
 
     const width = `${imgSize?.width + imgWrapperStyled.padding}px`
     const height = `${imgSize?.height + imgWrapperStyled.padding}px`

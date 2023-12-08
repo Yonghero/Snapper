@@ -7,7 +7,7 @@ defineOptions({
 <template>
   <main
     flex="~ gap-x-2"
-    border-box m-auto h-2xl w-6xl rounded p-5
+    border-box m-auto h-2xl w7xl rounded p-5
     class="glass-container"
   >
     <Screenshot />

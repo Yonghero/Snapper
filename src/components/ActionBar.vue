@@ -30,10 +30,6 @@ function onInsetChange(v) {
   imgInsetStyled.padding = `${v}px`
 }
 
-function onInput(event) {
-  imgInsetStyled.backgroundColor = event.target.value
-}
-
 function onChangeBackground({ color }) {
   imgWrapperStyled.backgroundImage = color
 }
@@ -77,9 +73,9 @@ function onChangeBackground({ color }) {
             :style="{ background: imgInsetStyled.backgroundColor }"
           >
             <input
+              v-model="imgInsetStyled.backgroundColor"
               type="color"
               class="opacity-0"
-              @input="onInput"
             >
           </div>
         </div>

@@ -38,6 +38,8 @@ declare global {
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getImageFileWays: typeof import('./src/composables/screenshot')['getImageFileWays']
   const getImageWays: typeof import('./src/composables/screenshot')['getImageWays']
+  const getMaxColorFormImg: typeof import('./src/composables/color')['getMaxColorFormImg']
+  const getRgbaFormImg: typeof import('./src/composables/color')['getRgbaFormImg']
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
@@ -334,6 +336,7 @@ declare module 'vue' {
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getImageFileWays: UnwrapRef<typeof import('./src/composables/screenshot')['getImageFileWays']>
+    readonly getMaxColorFormImg: UnwrapRef<typeof import('./src/composables/color')['getMaxColorFormImg']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -621,6 +624,7 @@ declare module '@vue/runtime-core' {
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getImageFileWays: UnwrapRef<typeof import('./src/composables/screenshot')['getImageFileWays']>
+    readonly getMaxColorFormImg: UnwrapRef<typeof import('./src/composables/color')['getMaxColorFormImg']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>

@@ -15,7 +15,9 @@ export const useScreenshotStore = defineStore('screenshot', () => {
     padding: 50,
   })
 
+  // 是否展示水印
   const showWatermark = ref(true)
+  // 水印内容
   const watermarkText = ref('Beautify by Snapper')
 
   return { imgInsetStyled, imgWrapperStyled, watermarkText, showWatermark }

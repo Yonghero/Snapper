@@ -3,13 +3,13 @@
       title="Snapper logo"
       alt="Snapper logo"
       src="./src/assets/logo.png"
+      align="center"
       style="width: 20rem"
    />
-   <h1>Snapper</h1>
+   <h1 align="center">Snapper</h1>
+   <code align="center">截图美化工具</code>
 </div>
-<h2 align="center">截图美化工具</h2>
-
-`打造一个Web端的Xnapper`
+<h2 align="center"></h2>
 
 ## Features
 

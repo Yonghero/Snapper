@@ -16,7 +16,7 @@ defineProps({
 </script>
 
 <template>
-  <div flex="~ col gap-y-1">
+  <div flex="~ col gap-y-1" cursor-pointer>
     <div
       h-10 w-10 rounded
       :style="{

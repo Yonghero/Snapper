@@ -5,7 +5,7 @@ export const useScreenshotStore = defineStore('screenshot', () => {
   // 图片样式
   const imgInsetStyled = useSessionStorage('imgInsetStyled', {
     borderRadius: 0,
-    boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+    boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 0px',
     padding: 0 as number | string,
     backgroundColor: '#ccc',
   })

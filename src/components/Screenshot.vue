@@ -89,6 +89,9 @@ function dragStart(event: any) {
 document.body.addEventListener('dragend', exportAsImage)
 
 onMounted(() => {
+  if (!previewImageSrc.value)
+    sessionStorage.clear()
+
   document.addEventListener('paste', async (event) => {
     const file = await formPasteEvent(event)
     displayImage(file)

@@ -100,7 +100,7 @@ function getShadowSliceValue(str) {
           <template #label>
             Shadow <ValueTip> {{ getShadowSliceValue(imgInsetStyled.boxShadow) }}</ValueTip>
           </template>
-          <a-slider :max="20" @change="onShadowChange" />
+          <a-slider :max="50" @change="onShadowChange" />
         </a-form-item>
       </div>
       <a-form-item label="Background">

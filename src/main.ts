@@ -11,6 +11,8 @@ import 'uno.css'
 import '@arco-design/web-vue/dist/arco.css'
 import './styles/main.css'
 
+import 'animate.css'
+
 const app = createApp(App)
 const pinia = createPinia()
 const router = createRouter({

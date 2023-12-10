@@ -13,6 +13,9 @@ const previewImageRef = ref<HTMLImageElement>()
 const previewImageSrc = useSessionStorage('previewImageSrc', '')
 const showing = computed(() => previewImageSrc.value && previewImageSrc.value?.length > 0)
 
+// 导出状态
+const exportLoading = ref(false)
+
 async function handleFileSelect(_: FileItem[], currentFile: FileItem) {
   const file = await formUpload(currentFile)
   displayImage(file)
@@ -59,6 +62,8 @@ function removeScreenshot() {
 }
 
 function exportAsImage() {
+  exportLoading.value = true
+
   if (!outermostLayer.value)
     return
 
@@ -71,6 +76,8 @@ function exportAsImage() {
     link.href = dataUrl
     link.download = 'exported_image.png'
     link.click()
+
+    exportLoading.value = false
   })
 }
 
@@ -175,4 +182,33 @@ onMounted(() => {
       </template>
     </a-upload>
   </div>
+  <Teleport to="body">
+    <Transition
+      enter-active-class="animate__animated animate__fadeIn"
+      leave-active-class="animate__animated animate__fadeOut"
+    >
+      <div
+        v-if="exportLoading"
+        class="overlay bg-black/[0.5] dark:bg-white/[0.5]"
+      >
+        <a-spin dot />
+      </div>
+    </Transition>
+  </Teleport>
 </template>
+
+<style>
+.overlay {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+</style>

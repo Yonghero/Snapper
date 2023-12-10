@@ -7,10 +7,11 @@ import { useScreenshotStore } from '~/store/useScreenshotStore'
 const { imgInsetStyled, imgWrapperStyled } = useScreenshotStore()
 const { formClipboard, formPasteEvent, formUpload } = getImageFileWays()
 
-const screenshotBg = ref<HTMLElement>()
-const screenshotImg = ref<HTMLImageElement>()
-const previewImage = ref<string>()
-const showing = computed(() => previewImage.value && previewImage.value?.length > 0)
+const outermostLayer = ref<HTMLElement>()
+const previewImageRef = ref<HTMLImageElement>()
+// 持久化存储 刷新后也可恢复图片
+const previewImageSrc = useSessionStorage('previewImageSrc', '')
+const showing = computed(() => previewImageSrc.value && previewImageSrc.value?.length > 0)
 
 async function handleFileSelect(_: FileItem[], currentFile: FileItem) {
   const file = await formUpload(currentFile)
@@ -27,17 +28,17 @@ function displayImage(file: File) {
 
   reader.onload = async (e) => {
     if (e.target?.result)
-      previewImage.value = e.target.result as string
+      previewImageSrc.value = e.target.result as string
 
     await nextTick()
     await nextTick()
 
-    const imgSize = screenshotImg.value?.getBoundingClientRect()
-    if (!imgSize || !screenshotBg.value)
+    const imgSize = previewImageRef.value?.getBoundingClientRect()
+    if (!imgSize || !outermostLayer.value)
       return
 
-    if (screenshotImg.value) {
-      const maxColor = await getMaxColorFormImg(screenshotImg.value)
+    if (previewImageRef.value) {
+      const maxColor = await getMaxColorFormImg(previewImageRef.value)
       if (maxColor)
         useScreenshotStore().imgInsetStyled.backgroundColor = maxColor
     }
@@ -45,22 +46,23 @@ function displayImage(file: File) {
     const width = `${imgSize?.width + imgWrapperStyled.padding}px`
     const height = `${imgSize?.height + imgWrapperStyled.padding}px`
 
-    screenshotBg.value.style.width = width
-    screenshotBg.value.style.height = height
+    outermostLayer.value.style.width = width
+    outermostLayer.value.style.height = height
   }
 
   reader.readAsDataURL(file)
 }
 
 function removeScreenshot() {
-  previewImage.value = ''
+  previewImageSrc.value = ''
+  sessionStorage.clear()
 }
 
 function exportAsImage() {
-  if (!screenshotBg.value)
+  if (!outermostLayer.value)
     return
 
-  html2canvas(screenshotBg.value).then((canvas) => {
+  html2canvas(outermostLayer.value).then((canvas) => {
     // Convert canvas to data URL
     const dataUrl = canvas.toDataURL('image/png')
 
@@ -116,7 +118,7 @@ onMounted(() => {
       border-box relative h-full w-full cursor-grab overflow-auto p-5
     >
       <div
-        ref="screenshotBg"
+        ref="outermostLayer"
         class="screenshot-bg relative"
         draggable="true"
         flex="~ justify-center items-center"
@@ -135,11 +137,11 @@ onMounted(() => {
           class="transform-scale-[0.9]"
         >
           <img
-            ref="screenshotImg"
+            ref="previewImageRef"
             :style="{
               borderRadius: (imgInsetStyled.padding === 0 || imgInsetStyled.padding === '0px') ? imgInsetStyled.borderRadius : 0,
             }"
-            :src="previewImage"
+            :src="previewImageSrc"
             object-scale-down
           >
         </div>

@@ -13,5 +13,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     Screenshot: typeof import('./src/components/Screenshot.vue')['default']
     TheFooter: typeof import('./src/components/TheFooter.vue')['default']
+    ValueTip: typeof import('./src/components/ValueTip.vue')['default']
   }
 }

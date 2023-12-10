@@ -33,6 +33,10 @@ function onInsetChange(v) {
 function onChangeBackground({ color }) {
   imgWrapperStyled.backgroundImage = color
 }
+
+function getShadowSliceValue(str) {
+  return str.slice(str.length - 4)
+}
 </script>
 
 <template>
@@ -54,6 +58,9 @@ function onChangeBackground({ color }) {
     </a-divider>
     <a-form :model="model" layout="vertical">
       <a-form-item label="Padding">
+        <template #label>
+          Padding <ValueTip> {{ imgWrapperStyled.padding }}</ValueTip>
+        </template>
         <a-slider
           :max="100"
           @change="(v) => onSliderChange(v, 'padding')"
@@ -61,6 +68,9 @@ function onChangeBackground({ color }) {
       </a-form-item>
       <div w-full flex items-center justify-center gap-x-1>
         <a-form-item label="Inset">
+          <template #label>
+            Inset <ValueTip> {{ imgInsetStyled.padding }}</ValueTip>
+          </template>
           <a-slider
             :max="100"
             @change="onInsetChange"
@@ -81,10 +91,16 @@ function onChangeBackground({ color }) {
       </div>
       <div class="mr-1 mt-[5px]" flex="~ items-center gap-x-3">
         <a-form-item label="Rounded">
+          <template #label>
+            Rounded <ValueTip> {{ imgInsetStyled.borderRadius }}</ValueTip>
+          </template>
           <a-slider @change="onRoundedChange" />
         </a-form-item>
         <a-form-item label="Shadow">
-          <a-slider max="20" @change="onShadowChange" />
+          <template #label>
+            Shadow <ValueTip> {{ getShadowSliceValue(imgInsetStyled.boxShadow) }}</ValueTip>
+          </template>
+          <a-slider :max="20" @change="onShadowChange" />
         </a-form-item>
       </div>
       <a-form-item label="Background">
@@ -98,6 +114,8 @@ function onChangeBackground({ color }) {
           />
         </div>
       </a-form-item>
+
+      <a-form-item label="Ratio/Size" />
 
       <div flex="~ col gap-y-2">
         <a-checkbox v-model="useScreenshotStore().showWatermark">

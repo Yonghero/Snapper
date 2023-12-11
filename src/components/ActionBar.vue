@@ -169,7 +169,7 @@ const ratioSizeSet = [
         </div>
       </a-form-item>
 
-      <a-form-item label="Ratio/Size" :label-col-style="{ margin: 0 }">
+      <a-form-item label="Ratio" :label-col-style="{ margin: 0 }">
         <a-space>
           <a-tag
             v-for="(tag, i) in ratioSizeSet"

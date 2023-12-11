@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 import type { FileItem } from '@arco-design/web-vue'
 import { IconDelete, IconSave } from '@arco-design/web-vue/es/icon'
+import dayjs from 'dayjs'
 import html2canvas from 'html2canvas'
 import { useScreenshotStore } from '~/store/useScreenshotStore'
 import type { anyToString } from '~/utils/types'
@@ -83,7 +84,7 @@ function exportAsImage() {
     // Create a link element and trigger a download
     const link = document.createElement('a')
     link.href = dataUrl
-    link.download = 'exported_image.png'
+    link.download = `Snapper_${dayjs('YYYY-MM-DD HH:mm')}`
     link.click()
 
     exportLoading.value = false

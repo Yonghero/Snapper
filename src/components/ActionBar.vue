@@ -1,5 +1,7 @@
 <script setup>
-import { useScreenshotStore } from '~/store/useScreenshotStore'
+import { Message } from '@arco-design/web-vue'
+import { IconDelete } from '@arco-design/web-vue/es/icon'
+import { DEFAULT_PRESET, useScreenshotStore } from '~/store/useScreenshotStore'
 
 const colorSet = [
   { color: 'linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%)', desc: 'Shville' },
@@ -21,6 +23,35 @@ const model = ref({})
 function onChangeBackground({ color }) {
   useScreenshotStore().imgWrapperStyled.backgroundImage = color
 }
+
+const presetConfirmVisible = ref(false)
+const form = ref({ name: '' })
+
+function onPresetSelectChange(value) {
+  const result = useScreenshotStore().presetMap[value]
+
+  if (value === DEFAULT_PRESET)
+    useScreenshotStore().restoreDefaultPreset()
+
+  useScreenshotStore().imgWrapperStyled = result.imgWrapperStyle
+  useScreenshotStore().imgInsetStyled = result.imgInsetStyle
+}
+
+function onNewPreset() {
+  presetConfirmVisible.value = true
+}
+
+function handleCancel() {
+  presetConfirmVisible.value = false
+}
+function handleBeforeOk(done) {
+  useScreenshotStore().addNewPreset(
+    form.value.name,
+    { imgInsetStyle: useScreenshotStore().imgInsetStyled, imgWrapperStyle: useScreenshotStore().imgWrapperStyled },
+  )
+  Message.success('New Preset Success')
+  done()
+}
 </script>
 
 <template>
@@ -29,14 +60,46 @@ function onChangeBackground({ color }) {
     flex="~ col gap-y-2"
     pl-4
   >
-    <a-select :style="{ width: '320px' }" placeholder="Please select ...">
-      <a-option>Default Preset</a-option>
-      <a-option>Shanghai</a-option>
-      <a-option>Guangzhou</a-option>
-      <a-option disabled>
-        New Preset...
-      </a-option>
-    </a-select>
+    <div flex="~ items-center gap-x-2">
+      <a-select
+        v-model="useScreenshotStore().presetKey"
+        :style="{ width: '320px' }"
+        placeholder="Please select ..."
+        @change="onPresetSelectChange"
+      >
+        <a-option
+          v-for="(preset, i) in Object.keys(useScreenshotStore().presetMap)"
+          :key="i"
+        >
+          {{ preset }}
+        </a-option>
+        <template #footer>
+          <div py-2 text-center flex="~ gap-x-2 justify-center">
+            <a-button
+              @click="useScreenshotStore().restoreDefaultPreset"
+            >
+              Restore default preset
+            </a-button>
+            <a-button @click="onNewPreset">
+              New preset ...
+            </a-button>
+          </div>
+        </template>
+      </a-select>
+
+      <IconDelete
+        v-if="useScreenshotStore().presetKey !== DEFAULT_PRESET"
+        style="stroke-width: 2;cursor: pointer;"
+        size="20"
+        @click="() => {
+          useScreenshotStore().removeOnePreset(useScreenshotStore().presetKey)
+          Message.success(`Remove ${useScreenshotStore().presetKey} Preset success`)
+          // 删除当前预设恢复为默认预设
+          useScreenshotStore().restoreDefaultPreset()
+        }"
+      />
+    </div>
+
     <a-divider orientation="left">
       Preset
     </a-divider>
@@ -115,4 +178,17 @@ function onChangeBackground({ color }) {
       </div>
     </a-form>
   </div>
+  <a-modal
+    v-model:visible="presetConfirmVisible"
+    title="New Preset"
+    ok-text="Confirm"
+    cancel-text="Exit"
+    @cancel="handleCancel" @before-ok="handleBeforeOk"
+  >
+    <a-form :model="form">
+      <a-form-item field="name" label="Perset name">
+        <a-input v-model="form.name" placeholder="Please enter preset name" />
+      </a-form-item>
+    </a-form>
+  </a-modal>
 </template>

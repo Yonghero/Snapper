@@ -9,7 +9,8 @@ export function addPxUnit(styleObj: Record<string, string | number>, key?: strin
         cloneObj[key] = `${cloneObj[key]}px`
     }
     else {
-      cloneObj[i] = `${cloneObj[i]}px`
+      if (typeof cloneObj[i] === 'number')
+        cloneObj[i] = `${cloneObj[i]}px`
     }
   })
 

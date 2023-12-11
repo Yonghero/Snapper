@@ -11,10 +11,9 @@ const colorSet = [
 ]
 
 const model = ref({})
-const { imgInsetStyled, imgWrapperStyled } = useScreenshotStore()
 
 function onChangeBackground({ color }) {
-  imgWrapperStyled.backgroundImage = color
+  useScreenshotStore().imgWrapperStyled.backgroundImage = color
 }
 </script>
 
@@ -38,30 +37,30 @@ function onChangeBackground({ color }) {
     <a-form :model="model" layout="vertical">
       <a-form-item label="Padding">
         <template #label>
-          Padding <ValueTip> {{ imgWrapperStyled.padding }}</ValueTip>
+          Padding <ValueTip> {{ useScreenshotStore().imgWrapperStyled.padding }}</ValueTip>
         </template>
         <a-slider
-          v-model="imgWrapperStyled.padding"
+          v-model="useScreenshotStore().imgWrapperStyled.padding"
           :max="100"
         />
       </a-form-item>
       <div w-full flex items-center justify-center gap-x-1>
         <a-form-item label="Inset">
           <template #label>
-            Inset <ValueTip> {{ imgInsetStyled.padding }}</ValueTip>
+            Inset <ValueTip> {{ useScreenshotStore().imgInsetStyled.padding }}</ValueTip>
           </template>
           <a-slider
-            v-model="imgInsetStyled.padding"
+            v-model="useScreenshotStore().imgInsetStyled.padding"
             :max="100"
           />
         </a-form-item>
         <div class="mr-1 mt-[5px]" flex="~ items-center gap-x-2">
           <div
             class="h-[24px] w-[60px] b-2 border-[#a9aeb8] rounded-[2px]"
-            :style="{ background: imgInsetStyled.backgroundColor }"
+            :style="{ background: useScreenshotStore().imgInsetStyled.backgroundColor }"
           >
             <input
-              v-model="imgInsetStyled.backgroundColor"
+              v-model="useScreenshotStore().imgInsetStyled.backgroundColor"
               type="color"
               class="opacity-0"
             >
@@ -71,16 +70,16 @@ function onChangeBackground({ color }) {
       <div class="mr-1 mt-[5px]" flex="~ items-center gap-x-3">
         <a-form-item label="Rounded">
           <template #label>
-            Rounded <ValueTip> {{ imgInsetStyled.borderRadius }}</ValueTip>
+            Rounded <ValueTip> {{ useScreenshotStore().imgInsetStyled.borderRadius }}</ValueTip>
           </template>
-          <a-slider v-model="imgInsetStyled.borderRadius" />
+          <a-slider v-model="useScreenshotStore().imgInsetStyled.borderRadius" />
         </a-form-item>
         <a-form-item label="Shadow">
           <template #label>
-            Shadow <ValueTip> {{ imgInsetStyled.boxShadow }}</ValueTip>
+            Shadow <ValueTip> {{ useScreenshotStore().imgInsetStyled.boxShadow }}</ValueTip>
           </template>
           <a-slider
-            v-model="imgInsetStyled.boxShadow"
+            v-model="useScreenshotStore().imgInsetStyled.boxShadow"
             :max="50"
           />
         </a-form-item>

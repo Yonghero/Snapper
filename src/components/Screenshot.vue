@@ -5,19 +5,19 @@ import html2canvas from 'html2canvas'
 import { useScreenshotStore } from '~/store/useScreenshotStore'
 import type { anyToString } from '~/utils/types'
 
-const { imgInsetStyled, imgWrapperStyled } = useScreenshotStore()
+const { imgInsetStyled, imgWrapperStyled, restStyled } = useScreenshotStore()
 const { formClipboard, formPasteEvent, formUpload } = getImageFileWays()
 
 const imgInsetStyledPx = computed(() => {
   return {
-    ...addPxUnit(imgInsetStyled),
-    boxShadow: `rgba(0, 0, 0, 0.35) 0px 5px ${imgInsetStyled.boxShadow}px`,
+    ...addPxUnit(useScreenshotStore().imgInsetStyled),
+    boxShadow: `rgba(0, 0, 0, 0.35) 0px 5px ${useScreenshotStore().imgInsetStyled.boxShadow}px`,
   } as anyToString<typeof imgInsetStyled>
 })
 
 const imgWrapperStyledPx = computed(() => {
   return {
-    ...addPxUnit(imgWrapperStyled, 'padding'),
+    ...addPxUnit(useScreenshotStore().imgWrapperStyled, 'padding'),
   } as unknown as anyToString<typeof imgWrapperStyled>
 })
 
@@ -72,7 +72,7 @@ function displayImage(file: File) {
 
 function removeScreenshot() {
   previewImageSrc.value = ''
-  sessionStorage.clear()
+  restStyled()
 }
 
 function exportAsImage() {
@@ -104,7 +104,7 @@ document.body.addEventListener('dragend', exportAsImage)
 
 onMounted(() => {
   if (!previewImageSrc.value)
-    sessionStorage.clear()
+    removeScreenshot()
 
   document.addEventListener('paste', async (event) => {
     const file = await formPasteEvent(event)
@@ -163,7 +163,7 @@ onMounted(() => {
           <img
             ref="previewImageRef"
             :style="{
-              borderRadius: (imgInsetStyled.padding === 0 || imgInsetStyled.padding === 0) ? imgInsetStyledPx.borderRadius : 0,
+              borderRadius: (useScreenshotStore().imgInsetStyled.padding === 0 || useScreenshotStore().imgInsetStyled.padding === 0) ? imgInsetStyledPx.borderRadius : 0,
             }"
             :src="previewImageSrc"
             object-scale-down

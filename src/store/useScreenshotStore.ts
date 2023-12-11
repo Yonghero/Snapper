@@ -59,13 +59,30 @@ export const useScreenshotStore = defineStore('screenshot', () => {
   }
 
   // 恢复默认预设
-  function restoreDefaultPreset() {
-    presetKey.value = DEFAULT_PRESET
-    addNewPreset(DEFAULT_PRESET, {
+  async function restoreDefaultPreset() {
+    delete presetMap.value[DEFAULT_PRESET]
+
+    await nextTick()
+    const defaultPreset = {
       imgInsetStyle: imgInsetDefaultValue,
       imgWrapperStyle: imgWrapperDefaultValue,
-    })
+    }
+    addNewPreset(DEFAULT_PRESET, defaultPreset)
+
+    await nextTick()
+
+    changeToOnePreset(DEFAULT_PRESET)
   }
 
-  return { imgInsetStyled, imgWrapperStyled, watermarkText, showWatermark, presetKey, presetMap, restStyled, addNewPreset, removeOnePreset, restoreDefaultPreset }
+  // 切换预设
+  function changeToOnePreset(key: string) {
+    presetKey.value = key
+
+    const result = presetMap.value[key]
+
+    useScreenshotStore().imgWrapperStyled = { ...result.imgWrapperStyle }
+    useScreenshotStore().imgInsetStyled = { ...result.imgInsetStyle }
+  }
+
+  return { imgInsetStyled, imgWrapperStyled, watermarkText, showWatermark, presetKey, presetMap, restStyled, addNewPreset, removeOnePreset, restoreDefaultPreset, changeToOnePreset }
 })

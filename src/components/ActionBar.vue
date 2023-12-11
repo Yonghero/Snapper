@@ -27,14 +27,12 @@ function onChangeBackground({ color }) {
 const presetConfirmVisible = ref(false)
 const form = ref({ name: '' })
 
-function onPresetSelectChange(value) {
-  const result = useScreenshotStore().presetMap[value]
-
-  if (value === DEFAULT_PRESET)
+function onPresetSelectChange(key) {
+  if (key === DEFAULT_PRESET)
     useScreenshotStore().restoreDefaultPreset()
 
-  useScreenshotStore().imgWrapperStyled = result.imgWrapperStyle
-  useScreenshotStore().imgInsetStyled = result.imgInsetStyle
+  else
+    useScreenshotStore().changeToOnePreset(key)
 }
 
 function onNewPreset() {

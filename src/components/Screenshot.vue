@@ -71,6 +71,13 @@ function displayImage(file: File) {
   reader.readAsDataURL(file)
 }
 
+watch(() => useScreenshotStore().ratioSize, (size) => {
+  if (!outermostLayer.value)
+    return
+  // css 宽高比
+  outermostLayer.value.style.aspectRatio = size
+})
+
 function exportAsImage() {
   exportLoading.value = true
 
@@ -140,7 +147,7 @@ onMounted(() => {
       v-if="showing"
       id="screenshot-wrapper"
       flex="~ items-center justify-center"
-      border-box relative h-full w-full cursor-grab overflow-auto p-5
+      border-box relative h-full w-full cursor-grab overflow-auto p-6
     >
       <div
         ref="outermostLayer"

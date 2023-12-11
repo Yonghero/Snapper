@@ -50,6 +50,12 @@ function handleBeforeOk(done) {
   Message.success('New Preset Success')
   done()
 }
+
+const ratioSizeSet = [
+  { label: 'Auto', value: 'auto' },
+  { label: '16:9', value: '16/9' },
+  { label: '4:3', value: '4/3' },
+]
 </script>
 
 <template>
@@ -163,7 +169,24 @@ function handleBeforeOk(done) {
         </div>
       </a-form-item>
 
-      <a-form-item label="Ratio/Size" :label-col-style="{ margin: 0 }" />
+      <a-form-item label="Ratio/Size" :label-col-style="{ margin: 0 }">
+        <a-space>
+          <a-tag
+            v-for="(tag, i) in ratioSizeSet"
+            :key="i"
+            color="arcoblue"
+            bordered
+            checkable
+            :checked="useScreenshotStore().ratioSize === tag.value"
+            @check="(c) => {
+              console.log(c, 'checked');
+              useScreenshotStore().ratioSize = tag.value
+            }"
+          >
+            {{ tag.label }}
+          </a-tag>
+        </a-space>
+      </a-form-item>
 
       <div flex="~ col gap-y-2">
         <a-checkbox v-model="useScreenshotStore().showWatermark">

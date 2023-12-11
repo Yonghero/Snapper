@@ -70,11 +70,6 @@ function displayImage(file: File) {
   reader.readAsDataURL(file)
 }
 
-function removeScreenshot() {
-  previewImageSrc.value = ''
-  restStyled()
-}
-
 function exportAsImage() {
   exportLoading.value = true
 
@@ -102,14 +97,19 @@ function dragStart(event: any) {
 
 document.body.addEventListener('dragend', exportAsImage)
 
+document.addEventListener('paste', async (event) => {
+  const file = await formPasteEvent(event)
+  displayImage(file)
+})
+
+function removeScreenshot() {
+  previewImageSrc.value = ''
+  restStyled()
+}
+
 onMounted(() => {
   if (!previewImageSrc.value)
     removeScreenshot()
-
-  document.addEventListener('paste', async (event) => {
-    const file = await formPasteEvent(event)
-    displayImage(file)
-  })
 })
 </script>
 

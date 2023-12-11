@@ -7,6 +7,12 @@ const colorSet = [
   { color: 'linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)', desc: 'Winter' },
   { color: 'linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%)', desc: 'Grass' },
   { color: 'linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)', desc: 'Azure' },
+  { color: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)', desc: 'Cloudy' },
+  { color: 'linear-gradient(to top, #30cfd0 0%, #330867 100%)', desc: 'pheus' },
+  { color: 'linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%)', desc: 'bow' },
+  { color: 'linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%)', desc: 'Crest' },
+  { color: 'linear-gradient(to top, #cc208e 0%, #6713d2 100%)', desc: 'Bath' },
+  { color: 'linear-gradient(to right, #243949 0%, #517fa4 100%)', desc: 'Stone' },
   { color: 'none', desc: 'None' },
 ]
 
@@ -35,7 +41,7 @@ function onChangeBackground({ color }) {
       Preset
     </a-divider>
     <a-form :model="model" layout="vertical">
-      <a-form-item label="Padding">
+      <a-form-item label="Padding" :label-col-style="{ margin: 0 }">
         <template #label>
           Padding <ValueTip> {{ useScreenshotStore().imgWrapperStyled.padding }}</ValueTip>
         </template>
@@ -45,7 +51,7 @@ function onChangeBackground({ color }) {
         />
       </a-form-item>
       <div w-full flex items-center justify-center gap-x-1>
-        <a-form-item label="Inset">
+        <a-form-item label="Inset" :label-col-style="{ margin: 0 }">
           <template #label>
             Inset <ValueTip> {{ useScreenshotStore().imgInsetStyled.padding }}</ValueTip>
           </template>
@@ -67,14 +73,14 @@ function onChangeBackground({ color }) {
           </div>
         </div>
       </div>
-      <div class="mr-1 mt-[5px]" flex="~ items-center gap-x-3">
-        <a-form-item label="Rounded">
+      <div class="mr-1 mt-[2px]" flex="~ items-center gap-x-3">
+        <a-form-item label="Rounded" :label-col-style="{ margin: 0 }">
           <template #label>
             Rounded <ValueTip> {{ useScreenshotStore().imgInsetStyled.borderRadius }}</ValueTip>
           </template>
           <a-slider v-model="useScreenshotStore().imgInsetStyled.borderRadius" />
         </a-form-item>
-        <a-form-item label="Shadow">
+        <a-form-item label="Shadow" :label-col-style="{ margin: 0 }">
           <template #label>
             Shadow <ValueTip> {{ useScreenshotStore().imgInsetStyled.boxShadow }}</ValueTip>
           </template>
@@ -96,7 +102,7 @@ function onChangeBackground({ color }) {
         </div>
       </a-form-item>
 
-      <a-form-item label="Ratio/Size" />
+      <a-form-item label="Ratio/Size" :label-col-style="{ margin: 0 }" />
 
       <div flex="~ col gap-y-2">
         <a-checkbox v-model="useScreenshotStore().showWatermark">

@@ -179,7 +179,6 @@ const ratioSizeSet = [
             checkable
             :checked="useScreenshotStore().ratioSize === tag.value"
             @check="(c) => {
-              console.log(c, 'checked');
               useScreenshotStore().ratioSize = tag.value
             }"
           >

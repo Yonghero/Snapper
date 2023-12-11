@@ -84,7 +84,7 @@ export const useScreenshotStore = defineStore('screenshot', () => {
     useScreenshotStore().imgInsetStyled = { ...result.imgInsetStyle }
   }
 
-  const ratioSize = ref<string>('auto')
+  const ratioSize = useSessionStorage('ratioSize', 'auto')
 
   return { imgInsetStyled, imgWrapperStyled, watermarkText, showWatermark, presetKey, presetMap, ratioSize, restStyled, addNewPreset, removeOnePreset, restoreDefaultPreset, changeToOnePreset }
 })

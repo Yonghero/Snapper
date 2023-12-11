@@ -91,7 +91,7 @@ function exportAsImage() {
     // Create a link element and trigger a download
     const link = document.createElement('a')
     link.href = dataUrl
-    link.download = `Snapper_${dayjs('YYYY-MM-DD HH:mm')}`
+    link.download = `Snapper_${dayjs().format('YYYY-MM-DD HH:mm')}.png`
     link.click()
 
     exportLoading.value = false

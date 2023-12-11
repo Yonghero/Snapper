@@ -5,15 +5,15 @@ export const useScreenshotStore = defineStore('screenshot', () => {
   // 图片样式
   const imgInsetStyled = useSessionStorage('imgInsetStyled', {
     borderRadius: 0,
-    boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 0px',
-    padding: 0 as number | string,
+    boxShadow: 10,
+    padding: 0,
     backgroundColor: '#ccc',
   })
 
   // 图片容器样式
   const imgWrapperStyled = useSessionStorage('imgWrapperStyled', {
     backgroundImage: 'linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%)',
-    padding: 50,
+    padding: 25,
   })
 
   // 是否展示水印

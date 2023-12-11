@@ -6,6 +6,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const addPxUnit: typeof import('./src/utils/index')['addPxUnit']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const computed: typeof import('vue')['computed']
@@ -37,9 +38,9 @@ declare global {
   const extractEmailAddresses: typeof import('./src/composables/recognizeAndMosaic')['extractEmailAddresses']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
-  const getImageFileWays: typeof import('./src/composables/screenshot')['getImageFileWays']
+  const getImageFileWays: typeof import('./src/utils/screenshot')['getImageFileWays']
   const getImageWays: typeof import('./src/composables/screenshot')['getImageWays']
-  const getMaxColorFormImg: typeof import('./src/composables/color')['getMaxColorFormImg']
+  const getMaxColorFormImg: typeof import('./src/utils/color')['getMaxColorFormImg']
   const getRgbaFormImg: typeof import('./src/composables/color')['getRgbaFormImg']
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
@@ -308,6 +309,7 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly addPxUnit: UnwrapRef<typeof import('./src/utils/index')['addPxUnit']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -338,8 +340,8 @@ declare module 'vue' {
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
-    readonly getImageFileWays: UnwrapRef<typeof import('./src/composables/screenshot')['getImageFileWays']>
-    readonly getMaxColorFormImg: UnwrapRef<typeof import('./src/composables/color')['getMaxColorFormImg']>
+    readonly getImageFileWays: UnwrapRef<typeof import('./src/utils/screenshot')['getImageFileWays']>
+    readonly getMaxColorFormImg: UnwrapRef<typeof import('./src/utils/color')['getMaxColorFormImg']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -596,6 +598,7 @@ declare module 'vue' {
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly addPxUnit: UnwrapRef<typeof import('./src/utils/index')['addPxUnit']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -626,8 +629,8 @@ declare module '@vue/runtime-core' {
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
-    readonly getImageFileWays: UnwrapRef<typeof import('./src/composables/screenshot')['getImageFileWays']>
-    readonly getMaxColorFormImg: UnwrapRef<typeof import('./src/composables/color')['getMaxColorFormImg']>
+    readonly getImageFileWays: UnwrapRef<typeof import('./src/utils/screenshot')['getImageFileWays']>
+    readonly getMaxColorFormImg: UnwrapRef<typeof import('./src/utils/color')['getMaxColorFormImg']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>

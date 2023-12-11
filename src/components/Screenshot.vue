@@ -3,9 +3,23 @@ import type { FileItem } from '@arco-design/web-vue'
 import { IconDelete, IconSave } from '@arco-design/web-vue/es/icon'
 import html2canvas from 'html2canvas'
 import { useScreenshotStore } from '~/store/useScreenshotStore'
+import type { anyToString } from '~/utils/types'
 
 const { imgInsetStyled, imgWrapperStyled } = useScreenshotStore()
 const { formClipboard, formPasteEvent, formUpload } = getImageFileWays()
+
+const imgInsetStyledPx = computed(() => {
+  return {
+    ...addPxUnit(imgInsetStyled),
+    boxShadow: `rgba(0, 0, 0, 0.35) 0px 5px ${imgInsetStyled.boxShadow}px`,
+  } as anyToString<typeof imgInsetStyled>
+})
+
+const imgWrapperStyledPx = computed(() => {
+  return {
+    ...addPxUnit(imgWrapperStyled, 'padding'),
+  } as unknown as anyToString<typeof imgWrapperStyled>
+})
 
 const outermostLayer = ref<HTMLElement>()
 const previewImageRef = ref<HTMLImageElement>()
@@ -132,7 +146,7 @@ onMounted(() => {
         class="screenshot-bg relative"
         draggable="true"
         flex="~ justify-center items-center"
-        :style="imgWrapperStyled"
+        :style="imgWrapperStyledPx"
         @dragstart="dragStart"
       >
         <h3
@@ -143,13 +157,13 @@ onMounted(() => {
           {{ useScreenshotStore().watermarkText }}
         </h3>
         <div
-          :style="imgInsetStyled"
+          :style="imgInsetStyledPx"
           class="transform-scale-[0.9]"
         >
           <img
             ref="previewImageRef"
             :style="{
-              borderRadius: (imgInsetStyled.padding === 0 || imgInsetStyled.padding === '0px') ? imgInsetStyled.borderRadius : 0,
+              borderRadius: (imgInsetStyled.padding === 0 || imgInsetStyled.padding === 0) ? imgInsetStyledPx.borderRadius : 0,
             }"
             :src="previewImageSrc"
             object-scale-down

@@ -13,29 +13,8 @@ const colorSet = [
 const model = ref({})
 const { imgInsetStyled, imgWrapperStyled } = useScreenshotStore()
 
-function onRoundedChange(v) {
-  imgInsetStyled.borderRadius = `${v}px`
-}
-
-function onShadowChange(v) {
-  const boxShadow = `rgba(0, 0, 0, 0.35) 0px ${5 + v}px ${15 + v}px`
-  imgInsetStyled.boxShadow = boxShadow
-}
-
-function onSliderChange(v, prop) {
-  imgWrapperStyled[prop] = `${v}px`
-}
-
-function onInsetChange(v) {
-  imgInsetStyled.padding = `${v}px`
-}
-
 function onChangeBackground({ color }) {
   imgWrapperStyled.backgroundImage = color
-}
-
-function getShadowSliceValue(str) {
-  return str.slice(str.length - 4)
 }
 </script>
 
@@ -62,8 +41,8 @@ function getShadowSliceValue(str) {
           Padding <ValueTip> {{ imgWrapperStyled.padding }}</ValueTip>
         </template>
         <a-slider
+          v-model="imgWrapperStyled.padding"
           :max="100"
-          @change="(v) => onSliderChange(v, 'padding')"
         />
       </a-form-item>
       <div w-full flex items-center justify-center gap-x-1>
@@ -72,8 +51,8 @@ function getShadowSliceValue(str) {
             Inset <ValueTip> {{ imgInsetStyled.padding }}</ValueTip>
           </template>
           <a-slider
+            v-model="imgInsetStyled.padding"
             :max="100"
-            @change="onInsetChange"
           />
         </a-form-item>
         <div class="mr-1 mt-[5px]" flex="~ items-center gap-x-2">
@@ -94,13 +73,16 @@ function getShadowSliceValue(str) {
           <template #label>
             Rounded <ValueTip> {{ imgInsetStyled.borderRadius }}</ValueTip>
           </template>
-          <a-slider @change="onRoundedChange" />
+          <a-slider v-model="imgInsetStyled.borderRadius" />
         </a-form-item>
         <a-form-item label="Shadow">
           <template #label>
-            Shadow <ValueTip> {{ getShadowSliceValue(imgInsetStyled.boxShadow) }}</ValueTip>
+            Shadow <ValueTip> {{ imgInsetStyled.boxShadow }}</ValueTip>
           </template>
-          <a-slider :max="50" @change="onShadowChange" />
+          <a-slider
+            v-model="imgInsetStyled.boxShadow"
+            :max="50"
+          />
         </a-form-item>
       </div>
       <a-form-item label="Background">

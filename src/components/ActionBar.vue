@@ -45,9 +45,11 @@ function handleCancel() {
 function handleBeforeOk(done) {
   useScreenshotStore().addNewPreset(
     form.value.name,
-    { imgInsetStyle: useScreenshotStore().imgInsetStyled, imgWrapperStyle: useScreenshotStore().imgWrapperStyled },
+    { imgInsetStyle: useScreenshotStore().imgInsetStyled, imgWrapperStyle: useScreenshotStore().imgWrapperStyled, ratioSize: useScreenshotStore().ratioSize },
   )
   Message.success('New Preset Success')
+
+  useScreenshotStore().changeToOnePreset(form.value.name)
   done()
 }
 
@@ -193,6 +195,7 @@ const ratioSizeSet = [
         </a-checkbox>
         <a-input
           v-model="useScreenshotStore().watermarkText"
+          :disabled="!useScreenshotStore().showWatermark"
           placeholder="Please enter watermark" allow-clear
         />
       </div>

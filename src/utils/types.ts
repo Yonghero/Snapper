@@ -7,4 +7,5 @@ export type anyToString<T extends Record<string, any>> = {
 export interface PresetValue {
   imgInsetStyle: typeof imgInsetDefaultValue
   imgWrapperStyle: typeof imgWrapperDefaultValue
+  ratioSize: string
 }

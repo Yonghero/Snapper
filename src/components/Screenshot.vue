@@ -6,7 +6,7 @@ import html2canvas from 'html2canvas'
 import { useScreenshotStore } from '~/store/useScreenshotStore'
 import type { anyToString } from '~/utils/types'
 
-const { imgInsetStyled, imgWrapperStyled, restStyled } = useScreenshotStore()
+const { imgInsetStyled, imgWrapperStyled, changeToOnePreset } = useScreenshotStore()
 const { formClipboard, formPasteEvent, formUpload } = getImageFileWays()
 
 const imgInsetStyledPx = computed(() => {
@@ -112,7 +112,7 @@ document.addEventListener('paste', async (event) => {
 
 function removeScreenshot() {
   previewImageSrc.value = ''
-  restStyled()
+  changeToOnePreset(useScreenshotStore().presetKey)
 }
 
 onMounted(() => {

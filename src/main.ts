@@ -1,4 +1,4 @@
-import ArcoVue, { Message } from '@arco-design/web-vue'
+import ArcoVue from '@arco-design/web-vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
@@ -18,7 +18,6 @@ const pinia = createPinia()
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 })
-Message._context = app._context
 
 app.use(pinia)
 app.use(router)

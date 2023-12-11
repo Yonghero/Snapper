@@ -6,7 +6,7 @@ export const imgInsetDefaultValue = {
   borderRadius: 0,
   boxShadow: 10,
   padding: 0,
-  backgroundColor: '#ccc',
+  backgroundColor: '#cccccc',
 }
 
 // 图片容器默认样式
@@ -24,12 +24,6 @@ export const useScreenshotStore = defineStore('screenshot', () => {
   // 图片容器样式
   const imgWrapperStyled = useSessionStorage('imgWrapperStyled', imgWrapperDefaultValue)
 
-  // 恢复默认样式
-  function restStyled() {
-    imgInsetStyled.value = { ...imgInsetDefaultValue }
-    imgWrapperStyled.value = { ...imgWrapperDefaultValue }
-  }
-
   // 是否展示水印
   const showWatermark = useSessionStorage('showWatermark', true)
   // 水印内容
@@ -42,9 +36,12 @@ export const useScreenshotStore = defineStore('screenshot', () => {
   const presetMap = useLocalStorage<Record<string, PresetValue>>('presetMap', { [DEFAULT_PRESET]: {
     imgInsetStyle: imgInsetDefaultValue,
     imgWrapperStyle: imgWrapperDefaultValue,
+    ratioSize: 'auto',
   } }, {
     mergeDefaults: true,
   })
+
+  const ratioSize = useSessionStorage('ratioSize', 'auto')
 
   // 添加一个预设
   function addNewPreset(key: string, value: PresetValue) {
@@ -66,6 +63,7 @@ export const useScreenshotStore = defineStore('screenshot', () => {
     const defaultPreset = {
       imgInsetStyle: imgInsetDefaultValue,
       imgWrapperStyle: imgWrapperDefaultValue,
+      ratioSize: 'auto',
     }
     addNewPreset(DEFAULT_PRESET, defaultPreset)
 
@@ -80,11 +78,10 @@ export const useScreenshotStore = defineStore('screenshot', () => {
 
     const result = presetMap.value[key]
 
-    useScreenshotStore().imgWrapperStyled = { ...result.imgWrapperStyle }
-    useScreenshotStore().imgInsetStyled = { ...result.imgInsetStyle }
+    imgWrapperStyled.value = { ...result.imgWrapperStyle }
+    imgInsetStyled.value = { ...result.imgInsetStyle }
+    ratioSize.value = result.ratioSize
   }
 
-  const ratioSize = useSessionStorage('ratioSize', 'auto')
-
-  return { imgInsetStyled, imgWrapperStyled, watermarkText, showWatermark, presetKey, presetMap, ratioSize, restStyled, addNewPreset, removeOnePreset, restoreDefaultPreset, changeToOnePreset }
+  return { imgInsetStyled, imgWrapperStyled, watermarkText, showWatermark, presetKey, presetMap, ratioSize, addNewPreset, removeOnePreset, restoreDefaultPreset, changeToOnePreset }
 })

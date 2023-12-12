@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     ActionBar: typeof import('./src/components/ActionBar.vue')['default']
     Background: typeof import('./src/components/Background.vue')['default']
+    BgChoice: typeof import('./src/components/BgChoice.vue')['default']
     RatioChoice: typeof import('./src/components/RatioChoice.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

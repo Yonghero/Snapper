@@ -8,4 +8,8 @@ export interface PresetValue {
   imgInsetStyle: typeof imgInsetDefaultValue
   imgWrapperStyle: typeof imgWrapperDefaultValue
   ratioSize: string
+  showWatermark: boolean
+  watermarkText: string
 }
+
+export interface RationChild { label: string, value: string }

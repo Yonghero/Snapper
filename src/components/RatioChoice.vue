@@ -48,6 +48,28 @@ const childrenRatioSet = [
   },
 ]
 
+const customRatio = ref<string>()
+const errorStatus = ref<boolean>(false)
+
+function applyCustomRatio() {
+  if (!customRatio.value)
+    errorStatus.value = true
+
+  if (customRatio.value) {
+    const splitResult = customRatio.value.trim().split('/')
+    const splitColonResult = customRatio.value.trim().split(':')
+
+    if (!splitColonResult?.length || !splitResult?.length)
+      errorStatus.value = true
+
+    if (splitResult)
+      useScreenshotStore().ratioSize = `${splitResult[0]}/${splitResult[1]}`
+
+    else if (splitColonResult)
+      useScreenshotStore().ratioSize = `${splitColonResult[0]}/${splitColonResult[1]}`
+  }
+}
+
 function isChecked(tagValue: string, child?: RationChild[]) {
   // 如果子项被选择则自己也被选中
   if (child)
@@ -62,7 +84,38 @@ function onCheck(tagValue: string) {
 </script>
 
 <template>
-  <div flex="~ wrap gap-y-3" mt-2 w-full>
+  <div flex="~ wrap gap-y-3" relative mt-2 w-full>
+    <a-trigger
+      trigger="click"
+      @hide="() => errorStatus = false"
+    >
+      <ValueTip
+        class="-top-7"
+        bordered absolute left-10 cursor-pointer
+      >
+        Custom...
+      </ValueTip>
+      <template #content>
+        <div
+          class="bg-[var(--color-bg-popup)]"
+          w-70 rounded p-3 shadow
+          flex="~ col items-center gap-y-3"
+        >
+          <a-input
+            v-model="customRatio"
+            :error="errorStatus"
+            placeholder="Enter a valid ratio (e.g. 1/2, 4/3)"
+          />
+          <div v-if="errorStatus" text-red>
+            Please enter valid values
+          </div>
+          <a-button @click="applyCustomRatio">
+            apply
+          </a-button>
+        </div>
+      </template>
+    </a-trigger>
+
     <a-space size="medium">
       <a-tag
         v-for="(tag, i) in ratioSizeSet"

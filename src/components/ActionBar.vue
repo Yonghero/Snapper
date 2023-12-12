@@ -37,7 +37,7 @@ function handleBeforeOk(done) {
 
 <template>
   <div
-    class="basis-[30%]"
+    class="basis-[20%]"
     flex="~ col gap-y-2"
     pl-4
   >

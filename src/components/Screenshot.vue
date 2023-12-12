@@ -116,7 +116,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="basis-[70%]" flex="~ items-center justify-center col gap-y-10" relative overflow-auto>
+  <div class="basis-[80%]" flex="~ items-center justify-center col gap-y-10" relative overflow-auto>
     <div
       absolute right-0 top-1 z-2 w-full flex-self-end
       flex="~ items-center gap-x-2 justify-between"

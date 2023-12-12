@@ -60,12 +60,6 @@ function displayImage(file: File) {
       if (maxColor)
         useScreenshotStore().imgInsetStyled.backgroundColor = maxColor
     }
-
-    const width = `${imgSize?.width + imgWrapperStyled.padding}px`
-    const height = `${imgSize?.height + imgWrapperStyled.padding}px`
-
-    outermostLayer.value.style.width = width
-    outermostLayer.value.style.height = height
   }
 
   reader.readAsDataURL(file)

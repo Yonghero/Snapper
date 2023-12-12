@@ -52,12 +52,6 @@ function handleBeforeOk(done) {
   useScreenshotStore().changeToOnePreset(form.value.name)
   done()
 }
-
-const ratioSizeSet = [
-  { label: 'Auto', value: 'auto' },
-  { label: '16:9', value: '16/9' },
-  { label: '4:3', value: '4/3' },
-]
 </script>
 
 <template>
@@ -172,21 +166,7 @@ const ratioSizeSet = [
       </a-form-item>
 
       <a-form-item label="Ratio" :label-col-style="{ margin: 0 }">
-        <a-space>
-          <a-tag
-            v-for="(tag, i) in ratioSizeSet"
-            :key="i"
-            color="arcoblue"
-            bordered
-            checkable
-            :checked="useScreenshotStore().ratioSize === tag.value"
-            @check="(c) => {
-              useScreenshotStore().ratioSize = tag.value
-            }"
-          >
-            {{ tag.label }}
-          </a-tag>
-        </a-space>
+        <RatioChoice />
       </a-form-item>
 
       <div flex="~ col gap-y-2">

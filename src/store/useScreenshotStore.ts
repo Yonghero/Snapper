@@ -15,6 +15,15 @@ export const imgWrapperDefaultValue = {
   padding: 25,
 }
 
+// 默认预设值
+export const defaultPreset = {
+  imgInsetStyle: imgInsetDefaultValue,
+  imgWrapperStyle: imgWrapperDefaultValue,
+  ratioSize: 'auto',
+  showWatermark: true,
+  watermarkText: 'Beautify by Snapper',
+}
+
 export const DEFAULT_PRESET = 'Default Preset'
 
 // 持久化存储 保持刷新后保持不变
@@ -33,11 +42,7 @@ export const useScreenshotStore = defineStore('screenshot', () => {
   const presetKey = useLocalStorage('presetKey', DEFAULT_PRESET)
 
   // 预设字典
-  const presetMap = useLocalStorage<Record<string, PresetValue>>('presetMap', { [DEFAULT_PRESET]: {
-    imgInsetStyle: imgInsetDefaultValue,
-    imgWrapperStyle: imgWrapperDefaultValue,
-    ratioSize: 'auto',
-  } }, {
+  const presetMap = useLocalStorage<Record<string, PresetValue>>('presetMap', { [DEFAULT_PRESET]: defaultPreset }, {
     mergeDefaults: true,
   })
 
@@ -60,11 +65,7 @@ export const useScreenshotStore = defineStore('screenshot', () => {
     delete presetMap.value[DEFAULT_PRESET]
 
     await nextTick()
-    const defaultPreset = {
-      imgInsetStyle: imgInsetDefaultValue,
-      imgWrapperStyle: imgWrapperDefaultValue,
-      ratioSize: 'auto',
-    }
+
     addNewPreset(DEFAULT_PRESET, defaultPreset)
 
     await nextTick()
@@ -81,6 +82,8 @@ export const useScreenshotStore = defineStore('screenshot', () => {
     imgWrapperStyled.value = { ...result.imgWrapperStyle }
     imgInsetStyled.value = { ...result.imgInsetStyle }
     ratioSize.value = result.ratioSize
+    showWatermark.value = result.showWatermark
+    watermarkText.value = result.watermarkText
   }
 
   return { imgInsetStyled, imgWrapperStyled, watermarkText, showWatermark, presetKey, presetMap, ratioSize, addNewPreset, removeOnePreset, restoreDefaultPreset, changeToOnePreset }

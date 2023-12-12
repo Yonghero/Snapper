@@ -68,17 +68,23 @@ function handleBeforeOk(done) {
         </template>
       </a-select>
 
-      <IconDelete
-        v-if="useScreenshotStore().presetKey !== DEFAULT_PRESET"
-        style="stroke-width: 2;cursor: pointer;"
-        size="20"
-        @click="() => {
+      <a-popconfirm
+        :content="`Are you sure you want to delete ${useScreenshotStore().presetKey} Preset`"
+        ok-text="Yes"
+        cancel-text="Cancel"
+        @ok="() => {
           useScreenshotStore().removeOnePreset(useScreenshotStore().presetKey)
           Message.success(`Remove ${useScreenshotStore().presetKey} Preset success`)
           // 删除当前预设恢复为默认预设
           useScreenshotStore().restoreDefaultPreset()
         }"
-      />
+      >
+        <IconDelete
+          v-if="useScreenshotStore().presetKey !== DEFAULT_PRESET"
+          style="stroke-width: 2;cursor: pointer;"
+          size="20"
+        />
+      </a-popconfirm>
     </div>
 
     <a-divider orientation="left">

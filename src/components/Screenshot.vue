@@ -145,7 +145,7 @@ onMounted(() => {
     >
       <div
         ref="outermostLayer"
-        class="screenshot-bg relative"
+        class="screenshot-bg relative bg-cover"
         draggable="true"
         flex="~ justify-center items-center"
         :style="imgWrapperStyledPx"

@@ -13,9 +13,11 @@
     "postinstall": "npx simple-git-hooks"
   },
   "dependencies": {
+    "@types/fabric": "^5.3.6",
     "@vueuse/core": "^10.7.0",
     "animate.css": "^4.1.1",
     "dayjs": "^1.11.10",
+    "fabric": "^5.3.0",
     "html2canvas": "^1.4.1",
     "pinia": "^2.1.7",
     "tesseract.js": "^5.0.3",

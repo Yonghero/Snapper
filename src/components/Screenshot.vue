@@ -31,6 +31,8 @@ const showing = computed(() => previewImageSrc.value && previewImageSrc.value?.l
 // 导出状态
 const exportLoading = ref(false)
 
+const { openEditableText, changeObjectsColor } = useFabricCanvas(computed(() => outermostLayer.value?.getBoundingClientRect()))
+
 async function handleFileSelect(_: FileItem[], currentFile: FileItem) {
   const file = await formUpload(currentFile)
   displayImage(file)
@@ -97,7 +99,7 @@ function dragStart(event: any) {
   event.dataTransfer.setDragImage(new Image(), 0, 0) // Hide default drag image
 }
 
-document.body.addEventListener('dragend', exportAsImage)
+// document.body.addEventListener('dragend', exportAsImage)
 
 document.addEventListener('paste', async (event) => {
   const file = await formPasteEvent(event)
@@ -121,15 +123,22 @@ onMounted(() => {
       absolute right-0 top-1 z-2 w-full flex-self-end
       flex="~ items-center gap-x-2 justify-between"
     >
-      <IconDelete
-        style="font-size: 25px;stroke-width: 2;color: red;cursor: pointer;"
-        @click="removeScreenshot"
+      <Editor
+        @open:editable-text="openEditableText"
+        @change:object-color="changeObjectsColor"
       />
-      <IconSave
-        style="font-size: 25px;stroke-width: 2;cursor: pointer;"
-        @click="exportAsImage"
-      />
+      <div flex="~ gap-x-5">
+        <IconDelete
+          style="font-size: 25px;stroke-width: 2;color: red;cursor: pointer;"
+          @click="removeScreenshot"
+        />
+        <IconSave
+          style="font-size: 25px;stroke-width: 2;cursor: pointer;"
+          @click="exportAsImage"
+        />
+      </div>
     </div>
+
     <a-button
       v-if="!showing"
       @click="pasteFromClipboard"
@@ -151,6 +160,7 @@ onMounted(() => {
         :style="imgWrapperStyledPx"
         @dragstart="dragStart"
       >
+        <canvas id="canvas" absolute left-0 top-0 />
         <h3
           v-show="useScreenshotStore().showWatermark"
           absolute bottom-2 right-2 text-white
@@ -229,5 +239,12 @@ onMounted(() => {
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
+}
+
+.canvas-container {
+  position: absolute!important;
+  left: 0!important;
+  top: 0!important;
+  z-index: 99!important;
 }
 </style>

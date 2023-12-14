@@ -20,9 +20,10 @@ function getType(type: EditToolType) {
 
 // 抛出切换工具类型事件
 function emitDrawtool(type: EditToolType) {
-  emit('update:toolType', type)
   // eslint-disable-next-line vue/custom-event-name-casing
   emit('switch:drawTool', type)
+  if (type !== props.toolType)
+    emit('update:toolType', type)
 }
 
 function initHotkeys() {

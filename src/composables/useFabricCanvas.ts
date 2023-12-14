@@ -65,6 +65,14 @@ export default function useFabricCanvas(containerDom: ComputedRef<HTMLElement | 
 
   async function switchDrawtool(toolType: DrawToolType) {
     unBindEvent()
+
+    // 如果同样的toolType则取消当前绑定事件
+    if (drawtoolType.value === toolType) {
+      drawtoolType.value = undefined
+      return
+    }
+
+    // 切换不同的toolType
     await nextTick()
     drawtoolType.value = toolType
 
@@ -134,8 +142,8 @@ export default function useFabricCanvas(containerDom: ComputedRef<HTMLElement | 
       // 释放箭头对象
       arrow = null
       startPoint = null
-      drawtoolType.value = undefined
-      unBindEvent()
+      // drawtoolType.value = undefined
+      // unBindEvent()
     }
   }
 
@@ -175,7 +183,7 @@ export default function useFabricCanvas(containerDom: ComputedRef<HTMLElement | 
         editableText.exitEditing()
       })
 
-      unBindEvent()
+      // unBindEvent()
     }
 
     mouseMoveHandler = (e) => {
@@ -200,7 +208,7 @@ export default function useFabricCanvas(containerDom: ComputedRef<HTMLElement | 
     }
 
     mouseUpHandler = () => {
-      drawtoolType.value = undefined
+      // drawtoolType.value = undefined
     }
   }
 

@@ -4,6 +4,7 @@ import { IconDelete, IconSave } from '@arco-design/web-vue/es/icon'
 import dayjs from 'dayjs'
 import html2canvas from 'html2canvas'
 import hotkeys from 'hotkeys-js'
+import { Message } from '@arco-design/web-vue'
 import { useScreenshotStore } from '~/store/useScreenshotStore'
 import type { anyToString } from '~/utils/types'
 
@@ -76,10 +77,12 @@ watch(() => useScreenshotStore().ratioSize, (size) => {
 })
 
 function exportAsImage() {
-  exportLoading.value = true
-
-  if (!outermostLayer.value)
+  if (!outermostLayer.value || !previewImageSrc.value) {
+    Message.warning('Noting to export!')
     return
+  }
+
+  exportLoading.value = true
 
   html2canvas(outermostLayer.value).then((canvas) => {
     // Convert canvas to data URL
@@ -131,14 +134,14 @@ onMounted(() => {
         @change:object-color="changeObjectsColor"
       />
       <div flex="~ gap-x-5">
-        <a-tooltip content="Remove Image">
+        <a-tooltip content="Remove Image (hotkeys: ctrl/command+shift+d)">
           <IconDelete
             style="font-size: 25px;stroke-width: 2;color: red;cursor: pointer;"
             @click="removeScreenshot"
           />
         </a-tooltip>
 
-        <a-tooltip content="Export image (hotkeys: ctrl+c / command+c)">
+        <a-tooltip content="Export image (hotkeys: ctrl/command+c)">
           <IconSave
             style="font-size: 25px;stroke-width: 2;cursor: pointer;"
             @click="exportAsImage"

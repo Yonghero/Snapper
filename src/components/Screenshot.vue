@@ -123,9 +123,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="basis-[80%]" flex="~ items-center justify-center col gap-y-10" relative overflow-auto>
+  <div class="basis-[80%]" flex="~ col" relative overflow-auto>
     <div
-      absolute right-0 top-1 z-2 w-full flex-self-end
+      z-2 w-full flex-self-end
       flex="~ items-center gap-x-2 justify-between"
     >
       <Editor
@@ -150,12 +150,6 @@ onMounted(() => {
       </div>
     </div>
 
-    <a-button
-      v-if="!showing"
-      @click="pasteFromClipboard"
-    >
-      Paste image from the clipboard
-    </a-button>
     <!-- 截图容器 -->
     <div
       v-if="showing"
@@ -193,16 +187,22 @@ onMounted(() => {
       </div>
     </div>
     <!-- 上传容器 -->
-    <a-upload
-      v-else
-      accept="image/*"
-      :auto-upload="false"
-      action="/"
-      @change="handleFileSelect"
-    >
-      <template #upload-button>
-        <div
-          style="
+    <div v-else flex="~ col items-center justify-center gap-y-5" m-auto>
+      <a-button
+        @click="pasteFromClipboard"
+      >
+        Paste image from the clipboard
+      </a-button>
+      <a-upload
+
+        accept="image/*"
+        :auto-upload="false"
+        action="/"
+        @change="handleFileSelect"
+      >
+        <template #upload-button>
+          <div
+            style="
             background-color: var(--color-fill-2);
             color: var(--color-text-1);
             border: 1px dashed var(--color-fill-4);
@@ -211,14 +211,15 @@ onMounted(() => {
             border-radius: 2;
             line-height: 158px;
             text-align: center;"
-        >
-          <div>
-            Drag the file here or
-            <span style="color: #3370FF">Click to upload</span>
+          >
+            <div>
+              Drag the file here or
+              <span style="color: #3370FF">Click to upload</span>
+            </div>
           </div>
-        </div>
-      </template>
-    </a-upload>
+        </template>
+      </a-upload>
+    </div>
   </div>
   <Teleport to="body">
     <Transition

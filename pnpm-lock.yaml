@@ -18,6 +18,7 @@ specifiers:
   eslint: ^8.55.0
   eslint-plugin-format: ^0.0.1
   fabric: ^5.3.0
+  hotkeys-js: ^3.13.2
   html2canvas: ^1.4.1
   jsdom: ^23.0.1
   lint-staged: ^15.2.0
@@ -45,6 +46,7 @@ dependencies:
   animate.css: 4.1.1
   dayjs: registry.npmmirror.com/dayjs/1.11.10
   fabric: registry.npmmirror.com/fabric/5.3.0
+  hotkeys-js: registry.npmmirror.com/hotkeys-js/3.13.2
   html2canvas: 1.4.1
   pinia: 2.1.7_typescript@5.3.2+vue@3.3.10
   tesseract.js: 5.0.3
@@ -6749,6 +6751,12 @@ packages:
     version: 2.0.1
     dev: false
     optional: true
+
+  registry.npmmirror.com/hotkeys-js/3.13.2:
+    resolution: {integrity: sha512-SXd+x90nhOdo5s+DZNPtrvXs0ZahQLXT0tWQ68bzjxCNUZ7eV4ZlNqjHLi3Kt2URpR8EBJOB2dBLdNfwIeql1A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/hotkeys-js/-/hotkeys-js-3.13.2.tgz}
+    name: hotkeys-js
+    version: 3.13.2
+    dev: false
 
   registry.npmmirror.com/html-encoding-sniffer/3.0.0:
     resolution: {integrity: sha512-oWv4T4yJ52iKrufjnyZPkrN0CH3QnrUqdB6In1g5Fe1mia8GmF36gnfNySxoZtxD5+NmYw1EElVXiBk93UeskA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/html-encoding-sniffer/-/html-encoding-sniffer-3.0.0.tgz}

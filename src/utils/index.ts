@@ -16,3 +16,10 @@ export function addPxUnit(styleObj: Record<string, string | number>, key?: strin
 
   return cloneObj
 }
+
+// 计算角度函数
+export function calculateAngle(startPoint: Record<string, any>, endPoint: Record<string, any>) {
+  const deltaX = endPoint.x - startPoint.x
+  const deltaY = endPoint.y - startPoint.y
+  return (Math.atan2(deltaY, deltaX) * 180) / Math.PI
+}

@@ -3,6 +3,7 @@ import type { FileItem } from '@arco-design/web-vue'
 import { IconDelete, IconSave } from '@arco-design/web-vue/es/icon'
 import dayjs from 'dayjs'
 import html2canvas from 'html2canvas'
+import hotkeys from 'hotkeys-js'
 import { useScreenshotStore } from '~/store/useScreenshotStore'
 import type { anyToString } from '~/utils/types'
 
@@ -31,7 +32,7 @@ const showing = computed(() => previewImageSrc.value && previewImageSrc.value?.l
 // 导出状态
 const exportLoading = ref(false)
 
-const { openEditableText, changeObjectsColor } = useFabricCanvas(computed(() => outermostLayer.value?.getBoundingClientRect()))
+const { changeObjectsColor, switchDrawtool, drawtoolType } = useFabricCanvas(computed(() => outermostLayer.value))
 
 async function handleFileSelect(_: FileItem[], currentFile: FileItem) {
   const file = await formUpload(currentFile)
@@ -94,13 +95,6 @@ function exportAsImage() {
   })
 }
 
-function dragStart(event: any) {
-  event.dataTransfer.setData('text/plain', null)
-  event.dataTransfer.setDragImage(new Image(), 0, 0) // Hide default drag image
-}
-
-// document.body.addEventListener('dragend', exportAsImage)
-
 document.addEventListener('paste', async (event) => {
   const file = await formPasteEvent(event)
   displayImage(file)
@@ -114,6 +108,14 @@ function removeScreenshot() {
 onMounted(() => {
   if (!previewImageSrc.value)
     removeScreenshot()
+
+  hotkeys('ctrl+c, command+c', () => {
+    exportAsImage()
+  })
+
+  hotkeys('ctrl+shift+d, command+shift+d', () => {
+    removeScreenshot()
+  })
 })
 </script>
 
@@ -124,18 +126,24 @@ onMounted(() => {
       flex="~ items-center gap-x-2 justify-between"
     >
       <Editor
-        @open:editable-text="openEditableText"
+        v-model:toolType="drawtoolType"
+        @switch:draw-tool="switchDrawtool"
         @change:object-color="changeObjectsColor"
       />
       <div flex="~ gap-x-5">
-        <IconDelete
-          style="font-size: 25px;stroke-width: 2;color: red;cursor: pointer;"
-          @click="removeScreenshot"
-        />
-        <IconSave
-          style="font-size: 25px;stroke-width: 2;cursor: pointer;"
-          @click="exportAsImage"
-        />
+        <a-tooltip content="Remove Image">
+          <IconDelete
+            style="font-size: 25px;stroke-width: 2;color: red;cursor: pointer;"
+            @click="removeScreenshot"
+          />
+        </a-tooltip>
+
+        <a-tooltip content="Export image (hotkeys: ctrl+c / command+c)">
+          <IconSave
+            style="font-size: 25px;stroke-width: 2;cursor: pointer;"
+            @click="exportAsImage"
+          />
+        </a-tooltip>
       </div>
     </div>
 
@@ -155,10 +163,8 @@ onMounted(() => {
       <div
         ref="outermostLayer"
         class="screenshot-bg relative bg-cover"
-        draggable="true"
         flex="~ justify-center items-center"
         :style="imgWrapperStyledPx"
-        @dragstart="dragStart"
       >
         <canvas id="canvas" absolute left-0 top-0 />
         <h3

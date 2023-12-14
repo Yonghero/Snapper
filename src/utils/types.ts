@@ -13,3 +13,7 @@ export interface PresetValue {
 }
 
 export interface RationChild { label: string, value: string }
+
+export type DrawToolType = 'arrow' | 'text' | 'selection' | 'color-picker'
+
+export type EditToolType = DrawToolType | 'color-picker'

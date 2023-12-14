@@ -9,6 +9,7 @@ declare global {
   const addPxUnit: typeof import('./src/utils/index')['addPxUnit']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
+  const calculateAngle: typeof import('./src/utils/index')['calculateAngle']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
@@ -314,6 +315,7 @@ declare module 'vue' {
     readonly addPxUnit: UnwrapRef<typeof import('./src/utils/index')['addPxUnit']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly calculateAngle: UnwrapRef<typeof import('./src/utils/index')['calculateAngle']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -605,6 +607,7 @@ declare module '@vue/runtime-core' {
     readonly addPxUnit: UnwrapRef<typeof import('./src/utils/index')['addPxUnit']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly calculateAngle: UnwrapRef<typeof import('./src/utils/index')['calculateAngle']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>

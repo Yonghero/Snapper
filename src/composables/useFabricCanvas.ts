@@ -28,8 +28,9 @@ export default function useFabricCanvas(containerDom: ComputedRef<HTMLElement | 
     evented: false,
   })
 
-  watchEffect(() => {
+  watchEffect(async () => {
     if (containerDom.value) {
+      await nextTick()
       fabricCanvas = new fabric.Canvas('canvas', {
         width: containerDom.value.getBoundingClientRect().width,
         height: containerDom.value.getBoundingClientRect().height,

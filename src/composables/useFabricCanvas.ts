@@ -1,6 +1,7 @@
 import { fabric } from 'fabric'
 import type { IEvent, Point } from 'fabric/fabric-impl'
 import hotkeys from 'hotkeys-js'
+import { useScreenshotStore } from '~/store/useScreenshotStore'
 
 import FabricArrow from '~/utils/fabric-arrow'
 import type { DrawToolType } from '~/utils/types'
@@ -31,6 +32,7 @@ export default function useFabricCanvas(containerDom: ComputedRef<HTMLElement | 
   watchEffect(async () => {
     if (containerDom.value) {
       await nextTick()
+      // 初始化canvas
       fabricCanvas = new fabric.Canvas('canvas', {
         width: containerDom.value.getBoundingClientRect().width,
         height: containerDom.value.getBoundingClientRect().height,
@@ -41,6 +43,24 @@ export default function useFabricCanvas(containerDom: ComputedRef<HTMLElement | 
       initHotKeys()
       initBindEvents()
     }
+  })
+
+  // 图片容器比例变化
+  // canvas也重新设置宽高
+  watch(() =>
+    [
+      useScreenshotStore().imgInsetStyled,
+      useScreenshotStore().ratioSize,
+      useScreenshotStore().imgWrapperStyled,
+    ], async () => {
+    await nextTick()
+    if (!containerDom.value)
+      return
+    const rect = containerDom.value.getBoundingClientRect()
+    fabricCanvas.setWidth(rect.width)
+    fabricCanvas.setHeight(rect.height)
+  }, {
+    deep: true,
   })
 
   async function switchDrawtool(toolType: DrawToolType) {

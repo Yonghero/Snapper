@@ -8,6 +8,7 @@ const model = ref({})
 const presetConfirmVisible = ref(false)
 const form = ref({ name: '' })
 
+// 切换预设
 function onPresetSelectChange(key) {
   if (key === DEFAULT_PRESET)
     useScreenshotStore().restoreDefaultPreset()
@@ -16,13 +17,17 @@ function onPresetSelectChange(key) {
     useScreenshotStore().changeToOnePreset(key)
 }
 
+// 打开新增预设弹窗
 function onNewPreset() {
   presetConfirmVisible.value = true
 }
 
+// 退出预设弹窗
 function handleCancel() {
   presetConfirmVisible.value = false
 }
+
+// 保存预设
 function handleBeforeOk(done) {
   useScreenshotStore().addNewPreset(
     form.value.name,

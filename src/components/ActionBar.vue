@@ -64,10 +64,10 @@ function handleBeforeOk(done) {
             <a-button
               @click="useScreenshotStore().restoreDefaultPreset"
             >
-              Restore default preset
+              {{ $t('Restore default preset') }}
             </a-button>
             <a-button @click="onNewPreset">
-              New preset ...
+              {{ $t('New preset') }} ...
             </a-button>
           </div>
         </template>
@@ -93,7 +93,7 @@ function handleBeforeOk(done) {
     </div>
 
     <a-divider orientation="left">
-      Preset
+      {{ $t('Preset') }}
     </a-divider>
     <a-form :model="model" layout="vertical">
       <a-form-item label="Padding" :label-col-style="{ margin: 0 }">
@@ -155,26 +155,28 @@ function handleBeforeOk(done) {
 
       <div flex="~ col gap-y-2">
         <a-checkbox v-model="useScreenshotStore().showWatermark">
-          Show watermark text
+          {{ $t('Show watermark text') }}
         </a-checkbox>
         <a-input
           v-model="useScreenshotStore().watermarkText"
           :disabled="!useScreenshotStore().showWatermark"
-          placeholder="Please enter watermark" allow-clear
+          :placeholder="$t('Please enter watermark')"
+          allow-clear
         />
       </div>
     </a-form>
   </div>
   <a-modal
     v-model:visible="presetConfirmVisible"
-    title="New Preset"
-    ok-text="Confirm"
-    cancel-text="Exit"
-    @cancel="handleCancel" @before-ok="handleBeforeOk"
+    :title="$t('New preset')"
+    :ok-text="$t('Confirm')"
+    :cancel-text="$t('Exit')"
+    @cancel="handleCancel"
+    @before-ok="handleBeforeOk"
   >
     <a-form :model="form">
-      <a-form-item field="name" label="Perset name">
-        <a-input v-model="form.name" placeholder="Please enter preset name" />
+      <a-form-item field="name" :label="`${$t('Preset')}名称`">
+        <a-input v-model="form.name" />
       </a-form-item>
     </a-form>
   </a-modal>

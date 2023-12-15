@@ -134,14 +134,16 @@ onMounted(() => {
         @change:object-color="changeObjectsColor"
       />
       <div flex="~ gap-x-5">
-        <a-tooltip content="Remove Image (hotkeys: ctrl/command+shift+d)">
+        <a-tooltip :content="`${$t('Remove Image')} (${$t('hotkeys')}: ctrl/command+shift+d)`">
           <IconDelete
             style="font-size: 25px;stroke-width: 2;color: red;cursor: pointer;"
             @click="removeScreenshot"
           />
         </a-tooltip>
 
-        <a-tooltip content="Export image (hotkeys: ctrl/command+c)">
+        <a-tooltip
+          :content="`${$t('Export image')} (${$t('hotkeys')}: ctrl/command+c)`"
+        >
           <IconSave
             style="font-size: 25px;stroke-width: 2;cursor: pointer;"
             @click="exportAsImage"

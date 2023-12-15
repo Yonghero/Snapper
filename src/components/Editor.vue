@@ -37,7 +37,7 @@ initHotkeys()
 
 <template>
   <a-button-group>
-    <a-tooltip content="Selection Mode">
+    <a-tooltip :content="$t('Selection Mode')">
       <a-button
         :type="getType('selection')"
         @click="emitDrawtool('selection')"
@@ -51,7 +51,7 @@ initHotkeys()
       </a-button>
     </a-tooltip>
 
-    <a-tooltip content="Add Text">
+    <a-tooltip :content="$t('Add Text')">
       <a-button
         :type="getType('text')"
         @click="emitDrawtool('text')"
@@ -59,13 +59,11 @@ initHotkeys()
         <template #icon>
           <icon-edit />
         </template>
-
-        <!-- Text -->
         2
       </a-button>
     </a-tooltip>
 
-    <a-tooltip content="Add Arrow">
+    <a-tooltip :content="$t('Add Arrow')">
       <a-button
         :type="getType('arrow')"
         @click="emitDrawtool('arrow')"
@@ -73,12 +71,11 @@ initHotkeys()
         <template #icon>
           <icon-arrow-rise />
         </template>
-        <!-- Arrow -->
         3
       </a-button>
     </a-tooltip>
 
-    <a-tooltip content="Change Objects Color">
+    <a-tooltip :content="$t('Change Objects Color')">
       <a-button
         :type="getType('color-picker')"
       >
@@ -112,7 +109,7 @@ initHotkeys()
       >
         <div cursor-pointer>
           <ValueTip bordered py-1 />
-          Tip: use number keys (1, 2, 3)
+          {{ $t('Tip: use number keys') }} (1, 2, 3)
         </div>
         <template #content>
           <div
@@ -121,13 +118,13 @@ initHotkeys()
             flex="~ col  gap-y-3"
           >
             <div>
-              Press "1" : Start to Selection mode
+              {{ $t('Press 1 : Start to Selection mode') }}
             </div>
             <div>
-              Press "2" : Add text
+              {{ $t('Press 2 : Add text') }}
             </div>
             <div>
-              Press "3" : Add arrow
+              {{ $t('Press 3 : Add arrow') }}
             </div>
           </div>
         </template>

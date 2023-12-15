@@ -93,7 +93,7 @@ function onCheck(tagValue: string) {
         class="-top-7"
         bordered absolute left-10 cursor-pointer
       >
-        Custom...
+        {{ $t('Custom') }}...
       </ValueTip>
       <template #content>
         <div
@@ -104,13 +104,13 @@ function onCheck(tagValue: string) {
           <a-input
             v-model="customRatio"
             :error="errorStatus"
-            placeholder="Enter a valid ratio (e.g. 1/2, 4/3)"
+            :placeholder="`${$t('Enter a valid ratio')} (e.g. 1/2, 4/3)`"
           />
           <div v-if="errorStatus" text-red>
-            Please enter valid values
+            {{ $t('Please enter valid values') }}
           </div>
           <a-button @click="applyCustomRatio">
-            apply
+            {{ $t('apply') }}
           </a-button>
         </div>
       </template>

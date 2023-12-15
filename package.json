@@ -13,7 +13,6 @@
     "postinstall": "npx simple-git-hooks"
   },
   "dependencies": {
-    "@types/fabric": "^5.3.6",
     "@vueuse/core": "^10.7.0",
     "animate.css": "^4.1.1",
     "dayjs": "^1.11.10",
@@ -21,15 +20,17 @@
     "hotkeys-js": "^3.13.2",
     "html2canvas": "^1.4.1",
     "pinia": "^2.1.7",
-    "tesseract.js": "^5.0.3",
     "unocss": "^0.58.0",
     "vue": "^3.3.10",
+    "vue-i18n": "9",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.3.3",
     "@arco-design/web-vue": "^2.53.3",
     "@iconify-json/carbon": "^1.1.24",
+    "@iconify-json/uil": "^1.1.8",
+    "@types/fabric": "^5.3.6",
     "@types/node": "^20.10.3",
     "@unocss/eslint-config": "^0.58.0",
     "@unocss/eslint-plugin": "^0.58.0",

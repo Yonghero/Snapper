@@ -5,10 +5,10 @@
 </p>
 
 <p align="center">
-Screenshot tool <b>beautification</b> for <b>every</b>one
+截图<b>美化</b>工具
 </p>
 <p align="center">
-  <a href="https://yonghero.github.io/Snapper/">Preview Now 🤘</a> | <a href="https://github.com/Yonghero/Snapper/blob/main/README.md">英文文档</a>
+  <a href="https://yonghero.github.io/Snapper/">点击预览 🤘</a> | <a href="https://github.com/Yonghero/Snapper/blob/main/README.md">英文文档</a>
 </p>
 <img src="./src/assets/light-effect.jpg"/>
 <img src="./src/assets/dark-effect.jpg"/>

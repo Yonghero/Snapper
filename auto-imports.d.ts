@@ -37,7 +37,7 @@ declare global {
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const extractEmailAddresses: typeof import('./src/composables/recognizeAndMosaic')['extractEmailAddresses']
-  const fabricArrow: typeof import('./src/utils/fabric-arrow.js')['default']
+  const fabricArrow: typeof import('./src/utils/fabric-arrow')['default']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getImageFileWays: typeof import('./src/utils/screenshot')['getImageFileWays']
@@ -342,7 +342,7 @@ declare module 'vue' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
-    readonly fabricArrow: UnwrapRef<typeof import('./src/utils/fabric-arrow.js')['default']>
+    readonly fabricArrow: UnwrapRef<typeof import('./src/utils/fabric-arrow')['default']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getImageFileWays: UnwrapRef<typeof import('./src/utils/screenshot')['getImageFileWays']>
@@ -634,7 +634,7 @@ declare module '@vue/runtime-core' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
-    readonly fabricArrow: UnwrapRef<typeof import('./src/utils/fabric-arrow.js')['default']>
+    readonly fabricArrow: UnwrapRef<typeof import('./src/utils/fabric-arrow')['default']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getImageFileWays: UnwrapRef<typeof import('./src/utils/screenshot')['getImageFileWays']>

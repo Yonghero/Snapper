@@ -1,9 +1,10 @@
 import { fabric } from 'fabric'
 
+// @ts-expect-error anyway
 fabric.Arrow = fabric.util.createClass(fabric.Line, {
   type: 'arrow',
   superType: 'drawing',
-  initialize(points, options) {
+  initialize(points: any, options: any) {
     if (!points) {
       const { x1, x2, y1, y2 } = options
       points = [x1, y1, x2, y2]
@@ -11,7 +12,7 @@ fabric.Arrow = fabric.util.createClass(fabric.Line, {
     options = options || {}
     this.callSuper('initialize', points, options)
   },
-  _render(ctx) {
+  _render(ctx: any) {
     this.callSuper('_render', ctx)
     ctx.save()
     const xDiff = this.x2 - this.x1
@@ -31,7 +32,7 @@ fabric.Arrow = fabric.util.createClass(fabric.Line, {
   },
 })
 
-fabric.Arrow.fromObject = (options, callback) => {
+fabric.Arrow.fromObject = (options: any, callback: any) => {
   const { x1, x2, y1, y2 } = options
   return callback(new fabric.Arrow([x1, y1, x2, y2], options))
 }

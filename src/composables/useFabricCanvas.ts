@@ -102,6 +102,13 @@ export default function useFabricCanvas(containerDom: ComputedRef<HTMLElement | 
     fabricCanvas.on('mouse:up', mouseUpHandler)
   }
 
+  function addTooltip() {
+    const tooltipExists = fabricCanvas.getObjects().includes(tooltip)
+    // 不存在则加入canvas当中
+    if (!tooltipExists)
+      fabricCanvas.add(tooltip)
+  }
+
   // 箭头绑定事件
   function bindArrowEvents() {
     let arrow: InstanceType<FabricArrow>, startPoint: Point | null
@@ -124,18 +131,25 @@ export default function useFabricCanvas(containerDom: ComputedRef<HTMLElement | 
     }
 
     mouseMoveHandler = (e) => {
-      if (arrow && e.pointer && startPoint) {
-        // 更新矩形箭头的角度和位置
-        const pointer = fabricCanvas.getPointer(e.e)
+      // 提示更新位置
+      const pointer = fabricCanvas.getPointer(e.e)
+      addTooltip()
+      tooltip.set({
+        left: pointer.x + 10, // 10像素的偏移量
+        top: pointer.y + 10,
+        text: `Arrow draw here`,
+      })
+
+      // 箭头更新位置前提是鼠标已经按下在绘制
+      if (arrow && startPoint) {
         arrow.set({
           left: pointer.x,
           top: pointer.y,
           x2: pointer.x,
           y2: pointer.y,
         })
-
-        fabricCanvas.requestRenderAll()
       }
+      fabricCanvas.requestRenderAll()
     }
 
     mouseUpHandler = () => {
@@ -182,20 +196,12 @@ export default function useFabricCanvas(containerDom: ComputedRef<HTMLElement | 
       editableText.on('mousedown', () => {
         editableText.exitEditing()
       })
-
-      // unBindEvent()
     }
 
     mouseMoveHandler = (e) => {
-      // 判断 tooltip 是否存在于 canvas 中
-      const tooltipExists = fabricCanvas.getObjects().includes(tooltip)
-
-      // 不存在则加入canvas当中
-      if (!tooltipExists)
-        fabricCanvas.add(tooltip)
-
       if (!fabricCanvas)
         return
+      addTooltip()
 
       const pointer = fabricCanvas.getPointer(e.e)
       tooltip.set({

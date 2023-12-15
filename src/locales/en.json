@@ -21,5 +21,9 @@
   "hotkeys": "hotkeys",
   "Enter a valid ratio": "Enter a valid ratio",
   "apply": "apply",
-  "Please enter valid values": "Please enter valid values"
+  "Please enter valid values": "Please enter valid values",
+  "Paste image from the clipboard": "Paste image from the clipboard",
+  "Drag the file here or": "Drag the file here or",
+  "Click to upload": "Click to upload"
+
 }

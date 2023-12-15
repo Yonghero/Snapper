@@ -193,7 +193,7 @@ onMounted(() => {
       <a-button
         @click="pasteFromClipboard"
       >
-        Paste image from the clipboard
+        {{ $t('Paste image from the clipboard') }}
       </a-button>
       <a-upload
 
@@ -215,8 +215,8 @@ onMounted(() => {
             text-align: center;"
           >
             <div>
-              Drag the file here or
-              <span style="color: #3370FF">Click to upload</span>
+              {{ $t('Drag the file here or') }}
+              <span style="color: #3370FF">{{ $t('Click to upload') }}</span>
             </div>
           </div>
         </template>

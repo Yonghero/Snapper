@@ -21,5 +21,8 @@
   "hotkeys": "快捷键",
   "Enter a valid ratio": "输入有效的比例值",
   "apply": "应用",
-  "Please enter valid values": "请输入有效值"
+  "Please enter valid values": "请输入有效值",
+  "Paste image from the clipboard": "点击从剪贴板粘贴图像",
+  "Drag the file here or": "将文件拖动到此处或",
+  "Click to upload": "点击上传"
 }

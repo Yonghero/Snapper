@@ -30,7 +30,6 @@ toggleDarkMode()
 
     <a-trigger
       trigger="hover"
-      :popup-translate="[0, -10]"
     >
       <div i-uil:english-to-chinese cursor-pointer />
 

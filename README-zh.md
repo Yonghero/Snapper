@@ -8,7 +8,7 @@
 Screenshot tool <b>beautification</b> for <b>every</b>one
 </p>
 <p align="center">
-  <a href="https://yonghero.github.io/Snapper/">Preview Now 🤘</a> | <a href="https://github.com/Yonghero/Snapper/blob/main/README-zh.md">中文文档 🇨🇳</a>
+  <a href="https://yonghero.github.io/Snapper/">Preview Now 🤘</a> | <a href="https://github.com/Yonghero/Snapper/blob/main/README.md">英文文档</a>
 </p>
 <img src="./src/assets/light-effect.jpg"/>
 <img src="./src/assets/dark-effect.jpg"/>

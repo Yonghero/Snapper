@@ -14,6 +14,7 @@ defineOptions({
     <a-divider direction="vertical" />
     <ActionBar />
   </main>
+  <TheFooter />
 </template>
 
 <style lang="scss">
